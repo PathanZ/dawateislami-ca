@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /vancouver/future/
+Sitemap: https://dawateislami.ca/sitemap.xml
