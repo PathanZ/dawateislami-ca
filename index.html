@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap"></noscript>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="assets/style.css?v=f3df98f6">
+<link rel="stylesheet" href="assets/style.css?v=c7324db9">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -31,15 +31,16 @@
     <a class="live" href="https://www.youtube.com/@MadaniChannelEnglishLive/live" target="_blank" rel="noopener">Madani Channel live</a>
   </div>
 </div>
-<header class="site-header">
+<header class="site-header over">
   <div class="wrap">
-    <a class="logo" href="index.html"><img src="assets/img/logo-sm.webp" width="400" height="108" alt="Dawat-e-Islami Canada home"></a>
+    <a class="logo" href="index.html"><img src="assets/img/logo-white-sm.webp" width="400" height="108" alt="Dawat-e-Islami Canada home"></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="about.html">About</a>
+      <a href="services.html">Services</a>
       <a href="departments.html">Departments</a>
       <a href="centres.html">Centres</a>
-      <a href="events.html">Events &amp; Classes</a>
+      <a href="events.html">Events</a>
       <a href="jamia.html">Jamia</a>
       <a href="contact.html">Contact</a>
       <a class="nav-donate" href="donate.html">Donate</a>
@@ -47,76 +48,163 @@
   </div>
 </header>
 <main id="main">
-  <section>
-    <div class="wrap bento">
-      <div class="tile navy b-hero">
-        <div>
-          <p class="salaam arabic" lang="ar">اَلسَّلَامُ عَلَيْكُمْ</p>
-          <h1>Welcome to Dawat-e-Islami Canada</h1>
-        </div>
-        <p class="lead">A global, non-political movement spreading the teachings of the Qur'an and Sunnah, serving communities at 13 centres across Canada since its founding in 1981.</p>
-        <div class="actions">
-          <a class="btn btn-gold" href="donate.html">Donate</a>
-          <a class="btn btn-ghost" href="centres.html">Find a centre</a>
-          <a class="btn btn-ghost" href="events.html">See what's on</a>
-        </div>
-      </div>
-      <a class="tile gold b-donate" href="donate.html">
-        <h2 class="h3">Donate</h2>
-        <p>Zakat, Fitrana, Sadaqah and masjid building →</p>
-      </a>
-      <a class="tile navy b-live" href="https://www.youtube.com/@MadaniChannelEnglishLive/live" target="_blank" rel="noopener"><span class="chip">● Live now</span><h2 class="h3">Madani Channel</h2><p>Watch in English, 24/7 →</p></a>
-      <a class="tile b-next" href="events/surrey-weekly-ijtima.html" style="text-decoration:none;color:inherit">
-        <span class="chip">Thursdays</span>
-        <h2 class="h3">Weekly Ijtima, Surrey</h2>
-        <p class="muted">7:00 PM</p>
-      </a>
-      <a class="tile sky b-next" href="events.html#courses" style="text-decoration:none;color:inherit">
-        <span class="chip">9 classes</span>
-        <h2 class="h3">Qur'an classes</h2>
-        <p class="muted">For children and adults</p>
-      </a>
-      <div class="tile b-slider" data-slider role="region" aria-roledescription="carousel" aria-label="Highlights">
-        <div class="slides">
-          <div class="slide on"><img src="assets/img/opt/reform-myself.png.webp" alt="I must strive to reform myself and the people of the entire world" loading="eager" fetchpriority="high"></div>
-          <div class="slide"><img src="assets/img/opt/centres-across-canada.png.webp" alt="Dawat-e-Islami centres across Canada" loading="lazy"></div>
-          <div class="slide"><img src="assets/img/opt/helping-palestinians.png.webp" alt="Helping Palestinians" loading="lazy"></div>
-        </div>
-        <div class="slide-dots" aria-hidden="true"><span class=on></span><span></span><span></span></div>
-        <div class="slide-ctrl"><button type="button" data-prev aria-label="Previous slide">‹</button><button type="button" data-next aria-label="Next slide">›</button></div>
+  <section class="hero">
+    <img class="hero-bg" src="assets/img/opt/quran-classes-real.jpg.webp" srcset="assets/img/opt/quran-classes-real.jpg.480.webp 480w, assets/img/opt/quran-classes-real.jpg.webp 960w" sizes="100vw" alt="" fetchpriority="high">
+    <div class="wrap hero-in">
+      <p class="eyebrow">13 centres across Canada</p>
+      <h1>Welcome to Dawat-e-Islami Canada</h1>
+      <p class="lead">A global, non-political Islamic movement spreading the teachings of the Qur'an and Sunnah. Weekly gatherings, free Qur'an classes and programs for every age at our centres across Canada.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="centres.html">Find a centre</a>
+        <a class="btn btn-ghost" href="donate.html">Donate</a>
       </div>
     </div>
   </section>
 
-  <section class="section tight" aria-label="Dawat-e-Islami Canada in numbers">
-    <div class="wrap stats">
-      <div class="tile"><b>13</b><span>Centres across Canada</span></div>
-      <div class="tile"><b>8</b><span>Weekly gatherings &amp; prayers</span></div>
-      <div class="tile"><b>9</b><span>Courses &amp; classes</span></div>
-      <div class="tile"><b>10</b><span>Departments</span></div>
+  <section class="quick" aria-label="Quick links">
+    <div class="wrap quick-grid">
+      <a class="q" href="centres.html"><span class="qi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span><b>Find a centre</b><span>13 centres, 6 provinces</span></a>
+      <a class="q" href="donate.html"><span class="qi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span><b>Donate</b><span>Zakat, Fitrana, Sadaqah</span></a>
+      <a class="q" href="events.html#courses"><span class="qi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h7a2 2 0 012 2v12a2 2 0 00-2-2H4zM20 5h-7a2 2 0 00-2 2v12a2 2 0 012-2h7z"/></svg></span><b>Classes</b><span>Qur'an, Hifz, weekend school</span></a>
+      <a class="q" href="events.html"><span class="qi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M5 21v-6a7 7 0 0114 0v6M3 21h18M9 21v-3h6v3"/></svg></span><b>Events</b><span>Weekly Ijtima and Jumu'ah</span></a>
     </div>
   </section>
 
   <section class="section">
-    <div class="wrap split">
-      <div class="tile">
+    <div class="wrap about-home">
+      <div class="prose">
         <p class="kicker">About us</p>
-        <h2 style="margin:6px 0 14px">Dawat-e-Islami Canada</h2>
-        <div class="prose">
-          <p>Dawat-e-Islami is a global, non-political Islamic organization working to spread the Qur'an and Sunnah. It was founded in 1981 in Karachi by Ameer-e-Ahl-e-Sunnat, Allama Maulana Muhammad Ilyas Attar Qadri.</p>
-          <p>Its departments run masajid, Qur'an classes, Islamic schools, Jamias, spiritual cure and welfare work. In Canada, this work reaches communities in 6 provinces.</p>
-        </div>
-        <p style="margin-top:14px"><a class="btn btn-navy" href="about.html">Read our story</a></p>
+        <h2>About Dawat-e-Islami Canada</h2>
+        <p>Dawat-e-Islami is a global, non-political Islamic organization devoted to spreading the Qur'an and Sunnah. It was founded on 2 September 1981 in Karachi, Pakistan, by Shaykh-e-Tariqat, Ameer-e-Ahl-e-Sunnat, Allama Maulana Muhammad Ilyas Attar Qadri Razavi.</p>
+        <p>Guided by compassion, Islamic knowledge and spiritual reform, it serves communities through Qur'an education, Islamic schools and universities, spiritual cure, welfare work and the Madani Channel. In Canada, this work reaches 6 provinces through 13 centres and two Jamia-tul-Madina campuses.</p>
+        <blockquote class="maqsad">"I must strive to reform myself and the people of the entire world, In sha Allah."<cite>Our Madani Maqsad</cite></blockquote>
+        <p class="actions"><a class="btn btn-navy" href="about.html">Read our story</a></p>
       </div>
-      <div class="tile cream">
-        <div class="founder">
-          <img src="assets/img/opt/1_founder_2044233964.jpeg.webp" alt="Ameer-e-Ahl-e-Sunnat, founder of Dawat-e-Islami" loading="lazy">
-          <div>
-            <p class="kicker">Our founder</p>
-            <blockquote>"I must strive to reform myself and the people of the entire world."</blockquote>
-            <cite>Ameer-e-Ahl-e-Sunnat, Maulana Muhammad Ilyas Attar Qadri</cite>
+      <figure class="about-photo"><img src="assets/img/opt/ameer-e-ahlesunnate-02-1735303750283.jpg.webp" srcset="assets/img/opt/ameer-e-ahlesunnate-02-1735303750283.jpg.480.webp 480w, assets/img/opt/ameer-e-ahlesunnate-02-1735303750283.jpg.webp 960w" sizes="(max-width: 860px) 92vw, 500px" alt="Ameer-e-Ahl-e-Sunnat, founder of Dawat-e-Islami" loading="lazy"><figcaption>Ameer-e-Ahl-e-Sunnat, founder of Dawat-e-Islami</figcaption></figure>
+    </div>
+    <div class="wrap">
+      <ul class="figures">
+        <li><b>1981</b><span>Founded in Karachi</span></li>
+        <li><b>13</b><span>Centres in Canada</span></li>
+        <li><b>9</b><span>Classes and courses</span></li>
+        <li><b>2</b><span>Jamia-tul-Madina campuses</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="kicker">Featured programs</p><h2>Islamic education for every age</h2><p class="lead">From a child's first Qur'an lesson to full scholarly training, free of charge.</p></div>
+        <a class="btn btn-line" href="departments.html">All departments</a>
+      </div>
+      <div class="cards four">
+        <a class="card pcard" href="departments/madrasa-tul-madina.html">
+          <div class="ph"><img src="assets/img/opt/hifz-ul-quran-classes-tn-1735219415788.jpg.webp" srcset="assets/img/opt/hifz-ul-quran-classes-tn-1735219415788.jpg.480.webp 480w, assets/img/opt/hifz-ul-quran-classes-tn-1735219415788.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>Madrasa-tul-Madina</h3>
+            <p>Free Qur'an memorisation, recitation and basic Islamic studies for children.</p>
+            <span class="more">Learn more →</span>
           </div>
-        </div>
+        </a>
+        <a class="card pcard" href="jamia.html">
+          <div class="ph"><img src="assets/img/opt/jamia-tul-madinah-real.jpg.webp" srcset="assets/img/opt/jamia-tul-madinah-real.jpg.480.webp 480w, assets/img/opt/jamia-tul-madinah-real.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>Jamia-tul-Madina</h3>
+            <p>A free scholarly course in the Islamic sciences, for men and women.</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>
+        <a class="card pcard" href="departments/faizan-weekend-islamic-school.html">
+          <div class="ph logo"><img src="assets/img/opt/37803251903_services.jpeg.webp" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>Faizan Weekend Islamic School</h3>
+            <p>An interactive Sunday school for children who attend public school.</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>
+        <a class="card pcard" href="departments/dar-ul-madinah.html">
+          <div class="ph"><img src="assets/img/opt/dar-ul-madinah-tn-1735219725460.jpg.webp" srcset="assets/img/opt/dar-ul-madinah-tn-1735219725460.jpg.480.webp 480w, assets/img/opt/dar-ul-madinah-tn-1735219725460.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>Dar-ul-Madinah</h3>
+            <p>An Islamic school system from nursery, combining school subjects with Islamic studies.</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="kicker">What we offer</p><h2>Your one-stop destination for Islamic learning and growth</h2><p class="lead">Daily, weekly and monthly activities for brothers, sisters and children, open to everyone.</p></div>
+        <a class="btn btn-line" href="services.html">All services</a>
+      </div>
+      <div class="cards three">
+        <a class="card pcard" href="services/12-religious-activities.html">
+          <div class="ph"><img src="assets/img/opt/tn-twelve-religious-activities-1734720451353.jpg.webp" srcset="assets/img/opt/tn-twelve-religious-activities-1734720451353.jpg.480.webp 480w, assets/img/opt/tn-twelve-religious-activities-1734720451353.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>12 Religious Activities</h3>
+            <p>Daily, weekly and monthly activities to improve ourselves and invite others to good, free for everyone.</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>
+        <a class="card pcard" href="services/sisters-8-religious-activities.html">
+          <div class="ph"><img src="assets/img/opt/sisters-religious-activities-cards-1739218822180.jpg.webp" srcset="assets/img/opt/sisters-religious-activities-cards-1739218822180.jpg.480.webp 480w, assets/img/opt/sisters-religious-activities-cards-1739218822180.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>Sisters' 8 Religious Activities</h3>
+            <p>Daily, weekly and monthly activities for Islamic sisters, run by sisters.</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>
+        <a class="card pcard" href="departments/madrasa-tul-madina.html">
+          <div class="ph"><img src="assets/img/opt/hifz-ul-quran-classes-tn-1735219415788.jpg.webp" srcset="assets/img/opt/hifz-ul-quran-classes-tn-1735219415788.jpg.480.webp 480w, assets/img/opt/hifz-ul-quran-classes-tn-1735219415788.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>Hifz-ul-Qur'an classes</h3>
+            <p>Free Qur'an memorisation, reading and basic Islamic studies for children.</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>
+        <a class="card pcard" href="services/evening-quran-classes.html">
+          <div class="ph"><img src="assets/img/opt/quran-classes-real.jpg.webp" srcset="assets/img/opt/quran-classes-real.jpg.480.webp 480w, assets/img/opt/quran-classes-real.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>Evening Qur'an classes</h3>
+            <p>Build a deep connection with the Holy Qur'an, whatever your age or level.</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>
+        <a class="card pcard" href="services/short-courses.html">
+          <div class="ph"><img src="assets/img/opt/short-courses.jpg.webp" srcset="assets/img/opt/short-courses.jpg.480.webp 480w, assets/img/opt/short-courses.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>Short courses</h3>
+            <p>Essential Islamic knowledge and skills for personal and spiritual growth.</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>
+        <a class="card pcard" href="jamia.html">
+          <div class="ph"><img src="assets/img/opt/jamia-tul-madinah-real.jpg.webp" srcset="assets/img/opt/jamia-tul-madinah-real.jpg.480.webp 480w, assets/img/opt/jamia-tul-madinah-real.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
+          <div class="bd">
+            <h3>Jamia-tul-Madina</h3>
+            <p>Dawat-e-Islami's Islamic university, training the scholars of tomorrow.</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band support">
+    <div class="wrap support-in">
+      <div>
+        <p class="kicker">Support us</p>
+        <h2>We need your help</h2>
+        <blockquote>"Sadaqah cools the heat of the grave for those who give it, and on the Day of Judgement the believer will be in the shade of his Sadaqah."<cite>Shu'ab-ul-Iman, vol. 3, p. 212, Hadith 3347</cite></blockquote>
+      </div>
+      <div class="support-give">
+        <p>Your donation keeps our centres open, pays for free Qur'an classes and trains the scholars of tomorrow. Choose where it goes:</p>
+        <div class="purpose-chips"><a href="donate.html?purpose=general">General donation</a><a href="donate.html?purpose=zakat">Zakat</a><a href="donate.html?purpose=sadaqah">Sadaqah</a><a href="donate.html?purpose=fitrana">Fitrana</a><a href="donate.html?purpose=fidya">Fidya</a><a href="donate.html?purpose=masjid">Build a masjid</a><a href="donate.html?purpose=teacher">Sponsor a teacher</a><a href="donate.html?purpose=jamia">Jamia-tul-Madina</a><a href="donate.html?purpose=madrasa">Madrasa-tul-Madina</a><a href="donate.html?purpose=madani-channel">Madani Channel</a><a href="donate.html?purpose=spiritual-cure">Spiritual Cure</a></div>
+        <div class="actions"><a class="btn btn-gold" href="donate.html">Donate now</a><a class="btn btn-ghost" href="receipt.html">Request a receipt</a></div>
       </div>
     </div>
   </section>
@@ -127,7 +215,7 @@
         <div><p class="kicker">Events and gatherings</p><h2>Join us this week</h2><p class="lead">Weekly gatherings and Friday prayers at our centres, open to everyone.</p></div>
         <a class="btn btn-line" href="events.html">All events</a>
       </div>
-      <div class="cards">
+      <div class="cards four">
         <a class="card ev" href="events/surrey-weekly-ijtima.html">
           <div class="when"><div class="day"><small>Every</small><b>Thu</b></div><div><p class="city">Weekly Ijtima</p><h3>Weekly Ijtima, Surrey</h3></div></div>
           <p class="meta">Every Thursday · 7:00 PM</p>
@@ -160,13 +248,13 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section soft">
     <div class="wrap">
       <div class="sec-head">
-        <div><p class="kicker">Courses and classes</p><h2>Learn with us</h2><p class="lead">Qur'an classes, Islamic school and courses for children and adults.</p></div>
+        <div><p class="kicker">Classes and courses</p><h2>Learn with us</h2><p class="lead">Qur'an classes, Islamic school and courses for children and adults.</p></div>
         <a class="btn btn-line" href="events.html#courses">All classes</a>
       </div>
-      <div class="cards">
+      <div class="cards four">
         <a class="card pcard" href="courses/quran-unlocked-calgary.html">
           <div class="ph poster"><img src="assets/img/opt/WhatsApp_Image_2026-06-09_at_15.24.07.jpeg.webp" srcset="assets/img/opt/WhatsApp_Image_2026-06-09_at_15.24.07.jpeg.480.webp 480w, assets/img/opt/WhatsApp_Image_2026-06-09_at_15.24.07.jpeg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></div>
           <div class="bd">
@@ -211,63 +299,29 @@
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <div class="sec-head">
-        <div><p class="kicker">Our departments</p><h2>Your path to Islamic knowledge</h2><p class="lead">From a child's first Qur'an lesson to full scholarly training.</p></div>
-        <a class="btn btn-line" href="departments.html">All departments</a>
-      </div>
-      <div class="cards">
-        <a class="card" href="departments/madrasa-tul-madina.html">
-          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h7a2 2 0 012 2v12a2 2 0 00-2-2H4zM20 5h-7a2 2 0 00-2 2v12a2 2 0 012-2h7z"/></svg></div>
-          <h3>Madrasa-tul-Madina</h3>
-          <p>Free Qur'an and basic Islamic studies for children and adults.</p>
-          <span class="more">Learn more →</span>
-        </a>
-        <a class="card" href="jamia.html">
-          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5M22 9v6"/></svg></div>
-          <h3>Jamia-tul-Madina</h3>
-          <p>Free scholarly training in the Islamic sciences.</p>
-          <span class="more">Learn more →</span>
-        </a>
-        <a class="card" href="departments/faizan-weekend-islamic-school.html">
-          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
-          <h3>Faizan Weekend Islamic School</h3>
-          <p>Weekend Islamic school for children in public school.</p>
-          <span class="more">Learn more →</span>
-        </a>
-        <a class="card" href="departments/dar-ul-madinah.html">
-          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
-          <h3>Dar-ul-Madinah</h3>
-          <p>Islamic schooling that combines school subjects with Islamic studies.</p>
-          <span class="more">Learn more →</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
+  <section class="section" id="pillars">
     <div class="wrap">
       <div class="sec-head">
         <div><p class="kicker">Discover Islam</p><h2>The five pillars of Islam</h2></div>
         
       </div>
       <div class="pillars">
-        <a class="pillar" href="islam/shahadah.html"><span class="arabic" lang="ar">شَهَادَة</span><small>First pillar</small><h3>Shahadah</h3><p>Bearing witness that there is none worthy of worship except Allah, and that Muhammad ﷺ is His Messenger.</p></a>
-        <a class="pillar" href="islam/salah.html"><span class="arabic" lang="ar">صَلَاة</span><small>Second pillar</small><h3>Salah</h3><p>Worshipping Allah through the five daily prayers.</p></a>
-        <a class="pillar" href="islam/zakat.html"><span class="arabic" lang="ar">زَكَاة</span><small>Third pillar</small><h3>Zakat</h3><p>Giving a portion of eligible wealth each year to those entitled to it.</p></a>
-        <a class="pillar" href="islam/sawm.html"><span class="arabic" lang="ar">صَوْم</span><small>Fourth pillar</small><h3>Sawm</h3><p>Fasting from dawn to sunset through the month of Ramadan.</p></a>
-        <a class="pillar" href="islam/hajj.html"><span class="arabic" lang="ar">حَجّ</span><small>Fifth pillar</small><h3>Hajj</h3><p>Pilgrimage to Makkah once in a lifetime, for those who are able.</p></a>
+        <a class="pillar" href="islam/shahadah.html"><div class="pp"><img src="assets/img/opt/shahadah-1735303442518.jpg.webp" alt="" loading="lazy"></div><div class="pb"><small>First pillar</small><h3>Shahadah</h3><p>Bearing witness that there is none worthy of worship except Allah, and that Muhammad ﷺ is His Messenger.</p></div></a>
+        <a class="pillar" href="islam/salah.html"><div class="pp"><img src="assets/img/opt/salah-tn.jpg.webp" alt="" loading="lazy"></div><div class="pb"><small>Second pillar</small><h3>Salah</h3><p>Worshipping Allah through the five daily prayers.</p></div></a>
+        <a class="pillar" href="islam/zakat.html"><div class="pp arabic-tile"><span class="arabic" lang="ar">زَكَاة</span></div><div class="pb"><small>Third pillar</small><h3>Zakat</h3><p>Giving a portion of eligible wealth each year to those entitled to it.</p></div></a>
+        <a class="pillar" href="islam/sawm.html"><div class="pp"><img src="assets/img/opt/sawm-tn-01.jpg.webp" alt="" loading="lazy"></div><div class="pb"><small>Fourth pillar</small><h3>Sawm</h3><p>Fasting from dawn to sunset through the month of Ramadan.</p></div></a>
+        <a class="pillar" href="islam/hajj.html"><div class="pp"><img src="assets/img/opt/hajj-tn.jpg.webp" alt="" loading="lazy"></div><div class="pb"><small>Fifth pillar</small><h3>Hajj</h3><p>Pilgrimage to Makkah once in a lifetime, for those who are able.</p></div></a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section soft">
     <div class="wrap">
       <div class="sec-head">
         <div><p class="kicker">Our centres</p><h2>Find a centre near you</h2><p class="lead">13 centres in 6 provinces, for prayers, weekly gatherings and classes.</p></div>
         <a class="btn btn-line" href="centres.html">All centres</a>
       </div>
+      <nav class="city-chips" aria-label="Centres by city"><a href="centres/faizan-e-madina-surrey.html">Surrey</a><a href="centres/faizan-e-makkah-calgary.html">Calgary</a><a href="centres/faizan-e-madina-edmonton.html">Edmonton</a><a href="centres/faizan-e-madina-regina.html">Regina</a><a href="centres/faizan-e-makkah-winnipeg.html">Winnipeg</a><a href="centres/faizan-e-attar-thorncliffe.html">East York</a><a href="centres/faizan-e-madina-etobicoke.html">Etobicoke</a><a href="centres/faizan-e-madina-hamilton.html">Hamilton</a><a href="centres/faizan-e-madina-ottawa.html">Ottawa</a><a href="centres/faizan-e-hub-e-rasool-montreal.html">Montreal</a></nav>
       <div class="cards three">
         <article class="card pcard">
           <a class="ph" href="centres/faizan-e-madina-surrey.html" tabindex="-1" aria-hidden="true"><img src="assets/img/opt/faizan-e-madina-masjid-surrey.jpg.webp" srcset="assets/img/opt/faizan-e-madina-masjid-surrey.jpg.480.webp 480w, assets/img/opt/faizan-e-madina-masjid-surrey.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></a>
@@ -281,7 +335,7 @@
               <a href="centres/faizan-e-madina-surrey.html">View centre</a>
               
               <a href="https://www.google.com/maps/search/?api=1&amp;query=7062+134+St%2C+Surrey%2C+BC+V3W+4T2" target="_blank" rel="noopener">Directions</a>
-              <a href="vancouver/" target="_blank" rel="noopener">Website</a>
+              <a href="vancouver/">Website</a>
               <a class="don" href="donate.html?centre=faizan-e-madina-surrey">Donate</a>
             </div>
           </div>
@@ -320,57 +374,24 @@
             </div>
           </div>
         </article>
-        <article class="card pcard">
-          <a class="ph" href="centres/faizan-e-madina-edmonton.html" tabindex="-1" aria-hidden="true"><img src="assets/img/opt/faizan-e-madina-edmonton.jpg.webp" srcset="assets/img/opt/faizan-e-madina-edmonton.jpg.480.webp 480w, assets/img/opt/faizan-e-madina-edmonton.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></a>
-          <div class="bd">
-            <p class="city">Edmonton, Alberta</p>
-            <h3>Faizan-e-Madina Edmonton</h3>
-            
-            <p>11809 96 St, Edmonton, AB T5G 1V4</p>
-            <p class="meta"><a href="tel:+17807296492">+1 (780) 729-6492</a></p>
-            <div class="card-links">
-              <a href="centres/faizan-e-madina-edmonton.html">View centre</a>
-              
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=11809+96+St%2C+Edmonton%2C+AB+T5G+1V4" target="_blank" rel="noopener">Directions</a>
-              
-              <a class="don" href="donate.html?centre=faizan-e-madina-edmonton">Donate</a>
-            </div>
-          </div>
-        </article>
-        <article class="card pcard">
-          <a class="ph" href="centres/faizan-e-madina-regina.html" tabindex="-1" aria-hidden="true"><img src="assets/img/opt/faizan-e-madina-islamic-center-regina.jpg.webp" srcset="assets/img/opt/faizan-e-madina-islamic-center-regina.jpg.480.webp 480w, assets/img/opt/faizan-e-madina-islamic-center-regina.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></a>
-          <div class="bd">
-            <p class="city">Regina, Saskatchewan</p>
-            <h3>Faizan-e-Madina Islamic Center Regina</h3>
-            
-            <p>1169 Athol St, Regina, SK S4T 3C3</p>
-            <p class="meta"><a href="tel:+14384010782">+1 (438) 401-0782</a></p>
-            <div class="card-links">
-              <a href="centres/faizan-e-madina-regina.html">View centre</a>
-              
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=1169+Athol+St%2C+Regina%2C+SK+S4T+3C3" target="_blank" rel="noopener">Directions</a>
-              
-              <a class="don" href="donate.html?centre=faizan-e-madina-regina">Donate</a>
-            </div>
-          </div>
-        </article>
-        <article class="card pcard">
-          <a class="ph" href="centres/faizan-e-madina-winnipeg.html" tabindex="-1" aria-hidden="true"><img src="assets/img/opt/faizan-e-madina-islamic-centre-winnipeg.jpg.webp" srcset="assets/img/opt/faizan-e-madina-islamic-centre-winnipeg.jpg.480.webp 480w, assets/img/opt/faizan-e-madina-islamic-centre-winnipeg.jpg.webp 960w" sizes="(max-width: 700px) 92vw, 400px" alt="" loading="lazy"></a>
-          <div class="bd">
-            <p class="city">Winnipeg, Manitoba</p>
-            <h3>Faizan-e-Madina Islamic Centre Winnipeg</h3>
-            
-            <p>585 St Anne's Rd, Winnipeg, MB R2M 5R5</p>
-            <p class="meta"><a href="tel:+12049981979">+1 (204) 998-1979</a></p>
-            <div class="card-links">
-              <a href="centres/faizan-e-madina-winnipeg.html">View centre</a>
-              
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=585+St+Anne%27s+Rd%2C+Winnipeg%2C+MB+R2M+5R5" target="_blank" rel="noopener">Directions</a>
-              
-              <a class="don" href="donate.html?centre=faizan-e-madina-winnipeg">Donate</a>
-            </div>
-          </div>
-        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="kicker">Highlights</p><h2>From Dawat-e-Islami Canada</h2></div>
+        
+      </div>
+      <div class="slider" data-slider role="region" aria-roledescription="carousel" aria-label="Highlights">
+        <div class="slides">
+          <div class="slide on"><img src="assets/img/opt/reform-myself.png.webp" alt="I must strive to reform myself and the people of the entire world" loading="lazy"></div>
+          <div class="slide"><img src="assets/img/opt/centres-across-canada.png.webp" alt="Dawat-e-Islami centres across Canada" loading="lazy"></div>
+          <div class="slide"><img src="assets/img/opt/helping-palestinians.png.webp" alt="Helping Palestinians" loading="lazy"></div>
+        </div>
+        <div class="slide-dots" aria-hidden="true"><span class=on></span><span></span><span></span></div>
+        <div class="slide-ctrl"><button type="button" data-prev aria-label="Previous slide">‹</button><button type="button" data-next aria-label="Next slide">›</button></div>
       </div>
     </div>
   </section>
@@ -390,7 +411,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section soft">
     <div class="wrap">
       <div class="sec-head">
         <div><p class="kicker">Media</p><h2>Watch and learn</h2><p class="lead">Videos from Dawat-e-Islami, and the Madani Channel live in English.</p></div>
@@ -401,19 +422,6 @@
         <div class="video"><div class="frame" data-yt="nQyMBwzZiko"><img src="https://i.ytimg.com/vi/nQyMBwzZiko/hqdefault.jpg" alt="" loading="lazy"><button class="play" type="button" aria-label="Play video: What is Haya?"><span>▶</span></button></div><p>What is Haya?</p></div>
         <div class="video"><div class="frame" data-yt="q2b8GDXGnDs"><img src="https://i.ytimg.com/vi/q2b8GDXGnDs/hqdefault.jpg" alt="" loading="lazy"><button class="play" type="button" aria-label="Play video: Most Devout Mother and Son"><span>▶</span></button></div><p>Most Devout Mother and Son</p></div>
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap appeal">
-      <div class="tile navy">
-        <p class="kicker">Donation appeal</p>
-        <h2>Zakat, Fitrana and Sadaqah</h2>
-        <p>Your donation keeps our masajid open, pays for free Qur'an classes and supports the training of scholars across Canada. Choose where your donation goes.</p>
-        <div class="purpose-chips"><a href="donate.html?purpose=general">General donation</a><a href="donate.html?purpose=zakat">Zakat</a><a href="donate.html?purpose=sadaqah">Sadaqah</a><a href="donate.html?purpose=fitrana">Fitrana</a><a href="donate.html?purpose=fidya">Fidya</a><a href="donate.html?purpose=masjid">Build a masjid</a><a href="donate.html?purpose=teacher">Sponsor a teacher</a><a href="donate.html?purpose=jamia">Jamia-tul-Madina</a><a href="donate.html?purpose=madrasa">Madrasa-tul-Madina</a><a href="donate.html?purpose=madani-channel">Madani Channel</a><a href="donate.html?purpose=spiritual-cure">Spiritual Cure</a></div>
-        <div class="actions"><a class="btn btn-gold" href="donate.html">Donate now</a><a class="btn btn-ghost" href="receipt.html">Request a receipt</a></div>
-      </div>
-      <div class="tile img"><img src="assets/img/opt/382144462964_campaign.jpeg.webp" alt="Dawat-e-Islami donation campaign" loading="lazy"></div>
     </div>
   </section>
 </main>
@@ -462,7 +470,7 @@
     </div>
   </div>
 </footer>
-<script src="assets/events.js?v=f3df98f6"></script>
-<script src="assets/main.js?v=f3df98f6"></script>
+<script src="assets/events.js?v=c7324db9"></script>
+<script src="assets/main.js?v=c7324db9"></script>
 </body>
 </html>

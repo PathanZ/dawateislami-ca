@@ -15,6 +15,7 @@ LIVE_URL = "https://www.youtube.com/@MadaniChannelEnglishLive/live"
 
 R2 = "https://pub-6e79549afc524bbd9a283071a4b99ca1.r2.dev/media"
 UK = "https://dawateislami.co.uk/admin/assets/uploads"
+US = "https://difm-assets-prod.s3.us-east-1.amazonaws.com"
 
 # ---- Online forms and donations --------------------------------------------------------------
 # DONATE_URL: the online donation page (for example a Zeffy or CanadaHelps form). Empty = TBC.
@@ -38,7 +39,14 @@ HERO_SLIDES = [
     (f"{R2}/hero/centres-across-canada.png", "Dawat-e-Islami centres across Canada"),
     (f"{R2}/hero/helping-palestinians.png", "Helping Palestinians"),
 ]
-FOUNDER_IMG = f"{UK}/about-us/1_founder_2044233964.jpeg"
+FOUNDER_IMG = f"{US}/site1/ameer-e-ahlesunnate-02-1735303750283.jpg"
+HERO_IMG = f"{US}/site1/quran-classes-real.jpg"          # big photo at the top of the home page
+ABOUT_IMG = f"{US}/site1/about-us-slide-02-1737880093137.jpg"
+
+# Shown in the "Support us" band
+SUPPORT_HADITH = ("Sadaqah cools the heat of the grave for those who give it, and on the Day of Judgement "
+                  "the believer will be in the shade of his Sadaqah.",
+                  "Shu'ab-ul-Iman, vol. 3, p. 212, Hadith 3347")
 APPEAL_IMG = f"{UK}/campaign/382144462964_campaign.jpeg"
 
 # ---- Centres ---------------------------------------------------------------------------------
@@ -196,50 +204,114 @@ COURSES = [
 # (slug, icon, name, short, long, image). slug "" = no page of its own; "http..." = external link
 DEPARTMENTS = [
     ("madrasa-tul-madina", "quran", "Madrasa-tul-Madina",
-     "Free Qur'an and basic Islamic studies for children and adults.",
-     "Madrasa-tul-Madina teaches children to read the Holy Qur'an correctly with tajweed (Nazra) and to memorise it (Hifz), alongside basic Islamic studies and good manners. There are classes for boys, for girls (taught by female teachers) and for adults. Classes are free of charge.",
-     f"{UK}/services/252015139205_services.jpeg"),
+     "Free Qur'an memorisation, recitation and basic Islamic studies for children.",
+     "Madrasa-tul-Madina teaches children to read the Holy Qur'an correctly with tajweed (Nazirah) and to memorise it (Hifz), together with basic Islamic studies, Sunnahs and good manners. There are classes for boys, for girls (taught by female teachers) and for adults. Worldwide, Madrasa-tul-Madina has more than 6,000 centres and around 270,000 learners. Classes are free of charge.",
+     f"{US}/site1/hifz-ul-quran-classes-tn-1735219415788.jpg"),
     ("jamia", "jamia", "Jamia-tul-Madina",
-     "Free scholarly training in the Islamic sciences.",
-     "", ""),
+     "A free scholarly course in the Islamic sciences, for men and women.",
+     "", f"{US}/site1/jamia-tul-madinah-real.jpg"),
     ("faizan-weekend-islamic-school", "school", "Faizan Weekend Islamic School",
-     "Weekend Islamic school for children in public school.",
-     "A weekend Islamic school for children who attend public school during the week. Students learn the basics of faith, prayer, the Qur'an and Islamic character in a friendly environment.",
+     "An interactive Sunday school for children who attend public school.",
+     "Faizan Weekend Islamic School is a Sunday school for children who attend public school during the week. Lively, hands-on lessons give the next generation a deeper understanding of Islam: belief, prayer, the Qur'an, Sunnahs and good character.",
      f"{UK}/services/37803251903_services.jpeg"),
     ("dar-ul-madinah", "school", "Dar-ul-Madinah",
-     "Islamic schooling that combines school subjects with Islamic studies.",
-     "Dar-ul-Madinah is Dawat-e-Islami's Islamic school system. Children follow the regular school curriculum together with Qur'an and Islamic studies, in an Islamic environment, starting from nursery level.",
-     f"{UK}/services/27824943186_services.jpeg"),
+     "An Islamic school system from nursery, combining school subjects with Islamic studies.",
+     "Dar-ul-Madinah is Dawat-e-Islami's Islamic school system. Starting from nursery level, children follow the regular school curriculum together with Qur'an and Islamic studies, with a strong focus on ethics and good character, in an Islamic environment.",
+     f"{US}/site1/dar-ul-madinah-tn-1735219725460.jpg"),
     ("courses", "courses", "Courses",
-     "Courses on Islamic knowledge for the general public.",
-     "", ""),
+     "Short courses on Islamic knowledge for everyone who wants to learn more.",
+     "", f"{US}/site1/short-courses.jpg"),
     ("maktaba-tul-madina", "book", "Maktaba-tul-Madina",
-     "Dawat-e-Islami's publisher of Islamic books and literature.",
-     "Maktaba-tul-Madina is the publishing department of Dawat-e-Islami. It publishes and distributes Islamic books, booklets and other religious items, many of them written by Ameer-e-Ahl-e-Sunnat.",
-     f"{UK}/services/39996572879_services.jpeg"),
+     "Islamic books in many languages, fragrance oils, clothing and miswaks.",
+     "Maktaba-tul-Madina is the publishing department of Dawat-e-Islami. It publishes and distributes Islamic books in many languages, many of them written by Ameer-e-Ahl-e-Sunnat, along with fragrance oils, clothing, miswaks and other items at affordable prices.",
+     f"{US}/site1/maktaba-tul-madinah-card-1739907439128.jpg"),
     ("spiritual-cure", "heart", "Spiritual Cure",
-     "Free Qur'anic and prophetic remedies for those in difficulty.",
-     "The Spiritual Cure department (Rohani Ilaj) offers comfort to people who are ill, grieving or facing difficulty, through remedies from the Qur'an and Hadith. Taweez, Kaat and Istikhara are given free of charge.",
-     f"{UK}/services/412033436556_services.jpeg"),
-    ("education", "courses", "Education Department",
-     "Monthly religious education seminars for students.",
-     "", ""),
-    ("it", "online", "IT Department",
-     "Websites, social media and technology for the work of Dawat-e-Islami.",
-     "", ""),
+     "Free Qur'anic and prophetic remedies for those who are ill or grieving.",
+     "The Spiritual Cure department (Rohani Ilaj) brings relief and guidance to people who are ill, grieving or facing difficulty, through remedies from the Qur'an and Hadith. Taweez, Kaat and Istikhara are given free of charge.",
+     f"{US}/site1/spiritual-cure.jpg"),
+    ("dar-ul-ifta", "courses", "Dar-ul-Ifta Ahl-e-Sunnat",
+     "Qualified muftis answer your religious questions.",
+     "Dar-ul-Ifta Ahl-e-Sunnat is a team of scholars and muftis who answer people's religious questions and give rulings on today's issues in the light of the Shari'ah. Questions can be asked online, at any time.",
+     f"{UK}/services/43564161020_services.jpeg"),
+    ("khuddam-ul-masajid", "dept", "Khuddam-ul-Masajid",
+     "Building and serving masajid and Islamic centres.",
+     "Khuddam-ul-Masajid wal Madaris buys land and builds masajid, madrasas and Islamic centres, and looks after them once they are built, so that every community has a place to pray and learn.",
+     f"{UK}/services/501807299140_services.jpeg"),
     ("madani-channel", "online", "Madani Channel",
      "24/7 Islamic television in English, Urdu and Bangla.",
-     "Madani Channel is Dawat-e-Islami's Islamic television channel, broadcasting around the clock in English, Urdu and Bangla. Its programs teach the Qur'an and Sunnah to viewers around the world. You can watch the English channel live on YouTube.",
+     "Madani Channel is Dawat-e-Islami's Islamic television channel, broadcasting around the clock in English, Urdu and Bangla. Its programs share knowledge, spirituality and guidance from the Qur'an and Sunnah with viewers around the world. You can watch the English channel live on YouTube.",
      f"{UK}/services/42188134555_services.jpeg"),
+    ("education", "courses", "Education Department",
+     "Monthly religious education seminars for school, college and university students.",
+     "", ""),
+    ("it", "online", "IT Department",
+     "Websites, social media and technology to share Islamic knowledge worldwide.",
+     "", ""),
 ]
 
 MORE_DEPARTMENTS = [
-    ("Dar-ul-Ifta Ahl-e-Sunnat", "Answers to religious questions from qualified muftis."),
     ("Madani Qafila", "Groups that travel to learn and share the teachings of Islam."),
-    ("Khuddam-ul-Masajid", "Building, maintaining and serving our masajid and centres."),
     ("FGRF", "Faizan Global Relief Foundation, Dawat-e-Islami's welfare and relief work."),
     ("Faizan Online Academy", "Live online Qur'an and Islamic studies classes."),
-    ("Programs for sisters", "Weekly gatherings, Qur'an classes and courses run by sisters."),
+    ("Finance", "Accounting and audit of all income, spending and assets."),
+    ("Research and Training", "Research, planning and training to improve every department's work."),
+]
+
+# ---- What we offer (services). page=True gets its own page; otherwise "link" is used --------
+SERVICES = [
+    {"slug": "12-religious-activities", "title": "12 Religious Activities", "page": True,
+     "img": f"{US}/site1/tn-twelve-religious-activities-1734720451353.jpg",
+     "short": "Daily, weekly and monthly activities to improve ourselves and invite others to good, free for everyone.",
+     "intro": "Twelve simple activities, held daily, weekly and monthly, that help us improve ourselves and invite others towards righteousness. Everyone is welcome and every activity is free.",
+     "items": [("Waking up for Fajr", "Helping fellow Muslims wake up for the Fajr prayer."),
+               ("Tafseer Halqa", "A daily circle after Fajr studying the meaning of at least three verses of the Qur'an."),
+               ("Dars", "A daily lesson on Sunnahs, Islamic manners and religious knowledge."),
+               ("Individual effort", "Inviting fellow Muslims towards good, one person at a time."),
+               ("Adult Qur'an classes", "Learning tajweed and correct recitation of the Qur'an as an adult."),
+               ("Weekly Ijtima", "A weekly gathering with recitation, naat, a talk, zikr and dua."),
+               ("Weekly Madani Muzakra", "A live weekly question-and-answer session with Ameer-e-Ahl-e-Sunnat on Madani Channel."),
+               ("Area visit", "Visiting homes in the neighbourhood to invite people towards good."),
+               ("A day in the path of Allah", "A weekly session in different areas teaching Sunnahs, manners and essential knowledge."),
+               ("Weekly booklet reading", "Reading or listening to a short booklet about the pious predecessors and key topics."),
+               ("Madani Qafila", "Travelling for 3, 12 or 30 days to learn and to spread the message of righteousness."),
+               ("Pious Deeds booklet", "A daily self-accountability booklet to track our own reform and progress.")]},
+    {"slug": "sisters-8-religious-activities", "title": "Sisters' 8 Religious Activities", "page": True,
+     "img": f"{US}/site1/sisters-religious-activities-cards-1739218822180.jpg",
+     "short": "Daily, weekly and monthly activities for Islamic sisters, run by sisters.",
+     "intro": "Eight activities, held daily, weekly and monthly, that help Islamic sisters grow closer to Allah, deepen their understanding of Islam and encourage others towards good. Islamic sisters are at the heart of strong families and righteous communities. All activities are free and run by sisters.",
+     "items": [("Individual effort", "Personal learning, self-improvement and inviting others to good."),
+               ("Dars at home", "Religious study sessions held in sisters' homes."),
+               ("Madani Muzakra", "Watching and learning from question-and-answer sessions on religious topics."),
+               ("Madrasa-tul-Madina for adult sisters", "Qur'an classes for adult sisters and young girls."),
+               ("Weekly Ijtima", "A weekly gathering with recitation, naat, a talk and dua."),
+               ("Monthly Ijtima", "A larger monthly gathering for sisters."),
+               ("Invitation to righteousness", "Organised outreach encouraging other sisters in their faith."),
+               ("Pious Deeds", "A self-accountability booklet to track progress in righteous living.")]},
+    {"slug": "hifz-ul-quran", "title": "Hifz-ul-Qur'an classes", "page": False, "link": "departments/madrasa-tul-madina.html",
+     "img": f"{US}/site1/hifz-ul-quran-classes-tn-1735219415788.jpg",
+     "short": "Free Qur'an memorisation, reading and basic Islamic studies for children."},
+    {"slug": "evening-quran-classes", "title": "Evening Qur'an classes", "page": True,
+     "img": f"{US}/site1/quran-classes-real.jpg",
+     "short": "Build a deep connection with the Holy Qur'an, whatever your age or level.",
+     "intro": "Evening Qur'an classes help brothers and sisters build a deep connection with the Holy Qur'an, a reflection of love for Allah and His Beloved Prophet ﷺ. Learn to read correctly with tajweed, at your own pace, in a friendly class after work or school.",
+     "items": []},
+    {"slug": "short-courses", "title": "Short courses", "page": True,
+     "img": f"{US}/site1/short-courses.jpg",
+     "short": "Essential Islamic knowledge and skills for personal and spiritual growth.",
+     "intro": "Short courses give lifelong learners the essential knowledge every Muslim needs, from wudu, salah and fasting to Sunnahs, manners and spiritual growth. They are taught by qualified teachers and open to the whole community.",
+     "items": []},
+    {"slug": "jamia", "title": "Jamia-tul-Madina", "page": False, "link": "jamia.html",
+     "img": f"{US}/site1/jamia-tul-madinah-real.jpg",
+     "short": "Dawat-e-Islami's Islamic university, training the scholars of tomorrow."},
+    {"slug": "spiritual-cure", "title": "Spiritual Cure", "page": False, "link": "departments/spiritual-cure.html",
+     "img": f"{US}/site1/spiritual-cure.jpg",
+     "short": "Relief and guidance through Qur'anic and prophetic remedies."},
+    {"slug": "maktaba", "title": "Maktaba-tul-Madina", "page": False, "link": "departments/maktaba-tul-madina.html",
+     "img": f"{US}/site1/maktaba-tul-madinah-card-1739907439128.jpg",
+     "short": "Islamic books, fragrance oils, clothing and miswaks at affordable prices."},
+    {"slug": "dar-ul-madinah", "title": "Dar-ul-Madinah school", "page": False, "link": "departments/dar-ul-madinah.html",
+     "img": f"{US}/site1/dar-ul-madinah-tn-1735219725460.jpg",
+     "short": "Islamic schooling from nursery, with school subjects and Islamic studies."},
 ]
 
 # ---- Books (free PDF booklets) ---------------------------------------------------------------
@@ -326,6 +398,14 @@ PILLARS = [
       ("A journey of the heart",
        "Hajj brings Muslims from every country together in equality and devotion, and a Hajj that is accepted wipes away past sins.")]),
 ]
+
+PILLAR_IMG = {
+    "shahadah": f"{US}/site0/shahadah-1735303442518.jpg",
+    "salah": f"{US}/site0/salah-tn.jpg",
+    "zakat": "",
+    "sawm": f"{US}/site0/sawm-tn-01.jpg",
+    "hajj": f"{US}/site0/hajj-tn.jpg",
+}
 
 WORLDWIDE = [
     ("Dawat-e-Islami (global)", "https://www.dawateislami.net/"),

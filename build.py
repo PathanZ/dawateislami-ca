@@ -110,8 +110,8 @@ def sec_head(kicker, title, lead="", link=None):
 
 
 # ---------------------------------------------------------------- page shell
-NAV = [("about.html", "About"), ("departments.html", "Departments"), ("centres.html", "Centres"),
-       ("events.html", "Events &amp; Classes"), ("jamia.html", "Jamia"), ("contact.html", "Contact")]
+NAV = [("about.html", "About"), ("services.html", "Services"), ("departments.html", "Departments"),
+       ("centres.html", "Centres"), ("events.html", "Events"), ("jamia.html", "Jamia"), ("contact.html", "Contact")]
 
 
 FONTS = "https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap"
@@ -149,19 +149,21 @@ def head(path, title, desc, pre):
 '''
 
 
-def header(current, pre):
+def header(current, pre, over=False):
     links = "\n      ".join(
         '<a href="' + pre + h + '"' + (' aria-current="page"' if h == current else "") + '>' + t + '</a>' for h, t in NAV)
     dc = ' aria-current="page"' if current == "donate.html" else ""
+    cls = "site-header over" if over else "site-header"
+    logo = "logo-white-sm.webp" if over else "logo-sm.webp"
     return f'''<div class="topbar">
   <div class="wrap">
     <span class="arabic bismillah" lang="ar">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</span>
     <a class="live" href="{LIVE_URL}" target="_blank" rel="noopener">Madani Channel live</a>
   </div>
 </div>
-<header class="site-header">
+<header class="{cls}">
   <div class="wrap">
-    <a class="logo" href="{pre}index.html"><img src="{pre}assets/img/logo-sm.webp" width="400" height="108" alt="Dawat-e-Islami Canada home"></a>
+    <a class="logo" href="{pre}index.html"><img src="{pre}assets/img/{logo}" width="400" height="108" alt="Dawat-e-Islami Canada home"></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       {links}
@@ -170,6 +172,7 @@ def header(current, pre):
   </div>
 </header>
 '''
+
 
 
 def footer(pre):
@@ -223,43 +226,52 @@ def footer(pre):
 '''
 
 
-def page_head(title, sub, crumbs, pre, actions="", image="", poster=False):
+def page_head(title, sub, crumbs, pre, actions="", image="", poster=False, fit=False):
     trail = f'<a href="{pre}index.html">Home</a>'
     for label, href in crumbs[:-1]:
         trail += f' <span>›</span> <a href="{pre}{href}">{label}</a>'
     trail += f' <span>›</span> <span aria-current="page">{crumbs[-1][0]}</span>'
     act = f'\n        <div class="actions">{actions}</div>' if actions else ""
-    text = f'''<div>
+    text = f'''<div class="ph-text">
         <nav class="crumbs" aria-label="Breadcrumb">{trail}</nav>
         <h1>{title}</h1>
         <p class="sub">{sub}</p>{act}
       </div>'''
-    if image:
-        return f'''  <section class="page-head has-img"><div class="wrap"><div class="tile-head">
-      {text}
-      <div class="head-img{' poster' if poster else ''}"><img src="{image}" alt="" loading="eager"></div>
-    </div></div></section>
+    fig = (f'\n      <div class="head-img{" poster" if poster else ""}{" logo" if "_services." in image else ""}{" fit" if fit else ""}"><img src="{image}" alt="" loading="eager" fetchpriority="high"></div>'
+           if image else "")
+    return f'''  <section class="page-head{" has-img" if image else ""}">
+    <div class="wrap ph-inner">
+      {text}{fig}
+    </div>
+  </section>
 '''
-    return f'''  <section class="page-head"><div class="wrap"><div class="tile-head">
-      {text}
-    </div></div></section>
-'''
+
 
 
 def write(path, title, desc, body_fn, current=""):
     depth = path.count("/")
     pre = "../" * depth
-    html = head(path, title, desc, pre) + header(current, pre) + body_fn(pre) + footer(pre)
+    home_page = path == "index.html"
+    html = head(path, title, desc, pre) + header(current, pre, over=home_page) + body_fn(pre) + footer(pre)
     out = ROOT / path
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html)
     WRITTEN.append(path)
 
-
 # ---------------------------------------------------------------- shared blocks
+
+def site_link(url, pre, label, cls=""):
+    if not url:
+        return ""
+    c = f' class="{cls}"' if cls else ""
+    if url.startswith("http"):
+        return f'<a{c} href="{url}" target="_blank" rel="noopener">{label}</a>'
+    return f'<a{c} href="{pre}{url}">{label}</a>'
+
+
 def centre_card(c, pre, show_map=False):
     note = f'<span class="note">{c["note"]}</span>' if c["note"] else ""
-    site = f'<a href="{c["site"]}" target="_blank" rel="noopener">Website</a>' if c["site"] else ""
+    site = site_link(c["site"], pre, "Website")
     mapb = (f'<a href="#map" class="map-btn" data-q="{e(c["address"])}" data-name="{e(c["name"])}">Show on map</a>'
             if show_map else "")
     return f'''        <article class="card pcard">
@@ -328,21 +340,52 @@ def dept_href(slug, pre):
     return f"{pre}departments/{slug}.html"
 
 
+def pic_box(url, pre, cls="ph"):
+    """A picture box for a card: photos fill the box, logos sit in the middle on white."""
+    if not url:
+        return ""
+    logo = "_services." in url
+    return (f'<div class="{cls}{" logo" if logo else ""}"><img src="{img(url, pre)}"{"" if logo else srcset(url, pre)} alt="" loading="lazy"></div>')
+
+
 def dept_card(d, pre):
-    slug, icon, name, short, _, _ = d
-    return f'''        <a class="card" href="{dept_href(slug, pre)}">
-          <div class="ic">{svg(icon)}</div>
-          <h3>{name}</h3>
-          <p>{short}</p>
-          <span class="more">Learn more →</span>
+    slug, icon, name, short, _, image = d
+    top = pic_box(image, pre) if image else f'<div class="ph icon">{svg(icon)}</div>'
+    return f'''        <a class="card pcard" href="{dept_href(slug, pre)}">
+          {top}
+          <div class="bd">
+            <h3>{name}</h3>
+            <p>{short}</p>
+            <span class="more">Learn more →</span>
+          </div>
         </a>'''
 
 
+def service_href(sv, pre):
+    return f"{pre}services/{sv['slug']}.html" if sv["page"] else pre + sv["link"]
+
+
+def service_card(sv, pre):
+    return f'''        <a class="card pcard" href="{service_href(sv, pre)}">
+          {pic_box(sv["img"], pre)}
+          <div class="bd">
+            <h3>{sv["title"]}</h3>
+            <p>{sv["short"]}</p>
+            <span class="more">Learn more →</span>
+          </div>
+        </a>'''
+
+
+
 def pillars_grid(pre):
-    items = "\n".join(
-        f'''        <a class="pillar" href="{pre}islam/{s}.html"><span class="arabic" lang="ar">{ar}</span><small>{num} pillar</small><h3>{en}</h3><p>{short}</p></a>'''
-        for s, ar, en, num, _, short, _ in PILLARS)
-    return f'      <div class="pillars">\n{items}\n      </div>'
+    items = []
+    for s_, ar, en, num, eng, short, _ in PILLARS:
+        pic = PILLAR_IMG.get(s_)
+        top = (f'<div class="pp"><img src="{img(pic, pre)}" alt="" loading="lazy"></div>' if pic
+               else f'<div class="pp arabic-tile"><span class="arabic" lang="ar">{ar}</span></div>')
+        items.append(f'''        <a class="pillar" href="{pre}islam/{s_}.html">{top}<div class="pb"><small>{num} pillar</small><h3>{en}</h3><p>{short}</p></div></a>''')
+    return '      <div class="pillars">\n' + "\n".join(items) + '\n      </div>'
+
 
 
 def etransfer_list():
@@ -355,33 +398,37 @@ def etransfer_list():
 
 def appeal(pre):
     chips = "".join(f'<a href="{pre}donate.html?purpose={k}">{n}</a>' for k, n, _ in DONATION_PURPOSES)
-    return f'''  <section class="section">
-    <div class="wrap appeal">
-      <div class="tile navy">
-        <p class="kicker">Donation appeal</p>
-        <h2>Zakat, Fitrana and Sadaqah</h2>
-        <p>Your donation keeps our masajid open, pays for free Qur'an classes and supports the training of scholars across Canada. Choose where your donation goes.</p>
+    q, src = SUPPORT_HADITH
+    return f'''  <section class="band support">
+    <div class="wrap support-in">
+      <div>
+        <p class="kicker">Support us</p>
+        <h2>We need your help</h2>
+        <blockquote>"{q}"<cite>{src}</cite></blockquote>
+      </div>
+      <div class="support-give">
+        <p>Your donation keeps our centres open, pays for free Qur'an classes and trains the scholars of tomorrow. Choose where it goes:</p>
         <div class="purpose-chips">{chips}</div>
         <div class="actions"><a class="btn btn-gold" href="{pre}donate.html">Donate now</a><a class="btn btn-ghost" href="{pre}receipt.html">Request a receipt</a></div>
       </div>
-      <div class="tile img"><img src="{img(APPEAL_IMG, pre)}" alt="Dawat-e-Islami donation campaign" loading="lazy"></div>
     </div>
   </section>
 '''
 
-
 # ---------------------------------------------------------------- home
+
 def home(pre):
+    provinces = len({c["province"] for c in CENTRES})
     slides = "\n".join(
-        f'          <div class="slide{" on" if i == 0 else ""}"><img src="{img(u, pre)}" alt="{e(a)}" {'loading="eager" fetchpriority="high"' if i == 0 else 'loading="lazy"'}></div>'
+        f'          <div class="slide{" on" if i == 0 else ""}"><img src="{img(u, pre)}" alt="{e(a)}" loading="lazy"></div>'
         for i, (u, a) in enumerate(HERO_SLIDES))
     dots = "".join(f'<span{" class=on" if i == 0 else ""}></span>' for i in range(len(HERO_SLIDES)))
-    nxt = EVENTS[0]
-    provinces = len({c["province"] for c in CENTRES})
+    featured = "\n".join(dept_card(d, pre) for d in DEPARTMENTS if d[0] in ("madrasa-tul-madina", "jamia", "faizan-weekend-islamic-school", "dar-ul-madinah"))
+    offers = "\n".join(service_card(sv, pre) for sv in SERVICES[:6])
     events = "\n".join(event_card(ev, pre) for ev in EVENTS[:4])
     courses = "\n".join(course_card(co, pre) for co in [x for x in COURSES if x["img"]][:4])
-    depts = "\n".join(dept_card(d, pre) for d in DEPARTMENTS[:4])
-    centres = "\n".join(centre_card(c, pre) for c in CENTRES[:6])
+    centres = "\n".join(centre_card(c, pre) for c in CENTRES[:3])
+    cities = "".join(f'<a href="{pre}centres/{c["slug"]}.html">{c["city"]}</a>' for c in {c["city"]: c for c in CENTRES}.values())
     books = "\n".join(
         f'''        <a class="book" href="{u}" target="_blank" rel="noopener"><div class="cover"><small>Free booklet</small><b>{t}</b></div><span>Read PDF →</span></a>'''
         for t, u in BOOKS)
@@ -389,117 +436,113 @@ def home(pre):
         f'''        <div class="video"><div class="frame" data-yt="{vid}"><img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy"><button class="play" type="button" aria-label="Play video: {e(t)}"><span>▶</span></button></div><p>{t}</p></div>'''
         for vid, t in VIDEOS)
     return f'''<main id="main">
-  <section>
-    <div class="wrap bento">
-      <div class="tile navy b-hero">
-        <div>
-          <p class="salaam arabic" lang="ar">اَلسَّلَامُ عَلَيْكُمْ</p>
-          <h1>Welcome to Dawat-e-Islami Canada</h1>
-        </div>
-        <p class="lead">A global, non-political movement spreading the teachings of the Qur'an and Sunnah, serving communities at {len(CENTRES)} centres across Canada since its founding in 1981.</p>
-        <div class="actions">
-          <a class="btn btn-gold" href="{pre}donate.html">Donate</a>
-          <a class="btn btn-ghost" href="{pre}centres.html">Find a centre</a>
-          <a class="btn btn-ghost" href="{pre}events.html">See what's on</a>
-        </div>
-      </div>
-      <a class="tile gold b-donate" href="{pre}donate.html">
-        <h2 class="h3">Donate</h2>
-        <p>Zakat, Fitrana, Sadaqah and masjid building →</p>
-      </a>
-      <a class="tile navy b-live" href="{LIVE_URL}" target="_blank" rel="noopener"><span class="chip">● Live now</span><h2 class="h3">Madani Channel</h2><p>Watch in English, 24/7 →</p></a>
-      <a class="tile b-next" href="{pre}events/{nxt["slug"]}.html" style="text-decoration:none;color:inherit">
-        <span class="chip">{nxt["day"]}s</span>
-        <h2 class="h3">{nxt["title"]}</h2>
-        <p class="muted">{nxt["time"]}</p>
-      </a>
-      <a class="tile sky b-next" href="{pre}events.html#courses" style="text-decoration:none;color:inherit">
-        <span class="chip">{len(COURSES)} classes</span>
-        <h2 class="h3">Qur'an classes</h2>
-        <p class="muted">For children and adults</p>
-      </a>
-      <div class="tile b-slider" data-slider role="region" aria-roledescription="carousel" aria-label="Highlights">
-        <div class="slides">
-{slides}
-        </div>
-        <div class="slide-dots" aria-hidden="true">{dots}</div>
-        <div class="slide-ctrl"><button type="button" data-prev aria-label="Previous slide">‹</button><button type="button" data-next aria-label="Next slide">›</button></div>
+  <section class="hero">
+    <img class="hero-bg" src="{img(HERO_IMG, pre)}"{srcset(HERO_IMG, pre).replace('(max-width: 700px) 92vw, 400px', '100vw')} alt="" fetchpriority="high">
+    <div class="wrap hero-in">
+      <p class="eyebrow">{len(CENTRES)} centres across Canada</p>
+      <h1>Welcome to Dawat-e-Islami Canada</h1>
+      <p class="lead">A global, non-political Islamic movement spreading the teachings of the Qur'an and Sunnah. Weekly gatherings, free Qur'an classes and programs for every age at our centres across Canada.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="{pre}centres.html">Find a centre</a>
+        <a class="btn btn-ghost" href="{pre}donate.html">Donate</a>
       </div>
     </div>
   </section>
 
-  <section class="section tight" aria-label="Dawat-e-Islami Canada in numbers">
-    <div class="wrap stats">
-      <div class="tile"><b>{len(CENTRES)}</b><span>Centres across Canada</span></div>
-      <div class="tile"><b>{len(EVENTS)}</b><span>Weekly gatherings &amp; prayers</span></div>
-      <div class="tile"><b>{len(COURSES)}</b><span>Courses &amp; classes</span></div>
-      <div class="tile"><b>{len(DEPARTMENTS)}</b><span>Departments</span></div>
+  <section class="quick" aria-label="Quick links">
+    <div class="wrap quick-grid">
+      <a class="q" href="{pre}centres.html"><span class="qi">{svg("pin")}</span><b>Find a centre</b><span>{len(CENTRES)} centres, {provinces} provinces</span></a>
+      <a class="q" href="{pre}donate.html"><span class="qi">{svg("heart")}</span><b>Donate</b><span>Zakat, Fitrana, Sadaqah</span></a>
+      <a class="q" href="{pre}events.html#courses"><span class="qi">{svg("quran")}</span><b>Classes</b><span>Qur'an, Hifz, weekend school</span></a>
+      <a class="q" href="{pre}events.html"><span class="qi">{svg("ijtima")}</span><b>Events</b><span>Weekly Ijtima and Jumu'ah</span></a>
     </div>
   </section>
 
   <section class="section">
-    <div class="wrap split">
-      <div class="tile">
+    <div class="wrap about-home">
+      <div class="prose">
         <p class="kicker">About us</p>
-        <h2 style="margin:6px 0 14px">Dawat-e-Islami Canada</h2>
-        <div class="prose">
-          <p>Dawat-e-Islami is a global, non-political Islamic organization working to spread the Qur'an and Sunnah. It was founded in 1981 in Karachi by Ameer-e-Ahl-e-Sunnat, Allama Maulana Muhammad Ilyas Attar Qadri.</p>
-          <p>Its departments run masajid, Qur'an classes, Islamic schools, Jamias, spiritual cure and welfare work. In Canada, this work reaches communities in {provinces} provinces.</p>
-        </div>
-        <p style="margin-top:14px"><a class="btn btn-navy" href="{pre}about.html">Read our story</a></p>
+        <h2>About Dawat-e-Islami Canada</h2>
+        <p>Dawat-e-Islami is a global, non-political Islamic organization devoted to spreading the Qur'an and Sunnah. It was founded on 2 September 1981 in Karachi, Pakistan, by Shaykh-e-Tariqat, Ameer-e-Ahl-e-Sunnat, Allama Maulana Muhammad Ilyas Attar Qadri Razavi.</p>
+        <p>Guided by compassion, Islamic knowledge and spiritual reform, it serves communities through Qur'an education, Islamic schools and universities, spiritual cure, welfare work and the Madani Channel. In Canada, this work reaches {provinces} provinces through {len(CENTRES)} centres and two Jamia-tul-Madina campuses.</p>
+        <blockquote class="maqsad">"I must strive to reform myself and the people of the entire world, In sha Allah."<cite>Our Madani Maqsad</cite></blockquote>
+        <p class="actions"><a class="btn btn-navy" href="{pre}about.html">Read our story</a></p>
       </div>
-      <div class="tile cream">
-        <div class="founder">
-          <img src="{img(FOUNDER_IMG, pre)}" alt="Ameer-e-Ahl-e-Sunnat, founder of Dawat-e-Islami" loading="lazy">
-          <div>
-            <p class="kicker">Our founder</p>
-            <blockquote>"I must strive to reform myself and the people of the entire world."</blockquote>
-            <cite>Ameer-e-Ahl-e-Sunnat, Maulana Muhammad Ilyas Attar Qadri</cite>
-          </div>
-        </div>
+      <figure class="about-photo"><img src="{img(FOUNDER_IMG, pre)}"{srcset(FOUNDER_IMG, pre).replace('(max-width: 700px) 92vw, 400px', '(max-width: 860px) 92vw, 500px')} alt="Ameer-e-Ahl-e-Sunnat, founder of Dawat-e-Islami" loading="lazy"><figcaption>Ameer-e-Ahl-e-Sunnat, founder of Dawat-e-Islami</figcaption></figure>
+    </div>
+    <div class="wrap">
+      <ul class="figures">
+        <li><b>1981</b><span>Founded in Karachi</span></li>
+        <li><b>{len(CENTRES)}</b><span>Centres in Canada</span></li>
+        <li><b>{len(COURSES)}</b><span>Classes and courses</span></li>
+        <li><b>2</b><span>Jamia-tul-Madina campuses</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="wrap">
+{sec_head("Featured programs", "Islamic education for every age", "From a child's first Qur'an lesson to full scholarly training, free of charge.", (pre + "departments.html", "All departments"))}
+      <div class="cards four">
+{featured}
       </div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
+{sec_head("What we offer", "Your one-stop destination for Islamic learning and growth", "Daily, weekly and monthly activities for brothers, sisters and children, open to everyone.", (pre + "services.html", "All services"))}
+      <div class="cards three">
+{offers}
+      </div>
+    </div>
+  </section>
+
+{appeal(pre)}
+  <section class="section">
+    <div class="wrap">
 {sec_head("Events and gatherings", "Join us this week", "Weekly gatherings and Friday prayers at our centres, open to everyone.", (pre + "events.html", "All events"))}
-      <div class="cards">
+      <div class="cards four">
 {events}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section soft">
     <div class="wrap">
-{sec_head("Courses and classes", "Learn with us", "Qur'an classes, Islamic school and courses for children and adults.", (pre + "events.html#courses", "All classes"))}
-      <div class="cards">
+{sec_head("Classes and courses", "Learn with us", "Qur'an classes, Islamic school and courses for children and adults.", (pre + "events.html#courses", "All classes"))}
+      <div class="cards four">
 {courses}
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-{sec_head("Our departments", "Your path to Islamic knowledge", "From a child's first Qur'an lesson to full scholarly training.", (pre + "departments.html", "All departments"))}
-      <div class="cards">
-{depts}
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
+  <section class="section" id="pillars">
     <div class="wrap">
 {sec_head("Discover Islam", "The five pillars of Islam")}
 {pillars_grid(pre)}
     </div>
   </section>
 
-  <section class="section">
+  <section class="section soft">
     <div class="wrap">
 {sec_head("Our centres", "Find a centre near you", f"{len(CENTRES)} centres in {provinces} provinces, for prayers, weekly gatherings and classes.", (pre + "centres.html", "All centres"))}
+      <nav class="city-chips" aria-label="Centres by city">{cities}</nav>
       <div class="cards three">
 {centres}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+{sec_head("Highlights", "From Dawat-e-Islami Canada")}
+      <div class="slider" data-slider role="region" aria-roledescription="carousel" aria-label="Highlights">
+        <div class="slides">
+{slides}
+        </div>
+        <div class="slide-dots" aria-hidden="true">{dots}</div>
+        <div class="slide-ctrl"><button type="button" data-prev aria-label="Previous slide">‹</button><button type="button" data-next aria-label="Next slide">›</button></div>
       </div>
     </div>
   </section>
@@ -513,7 +556,7 @@ def home(pre):
     </div>
   </section>
 
-  <section class="section">
+  <section class="section soft">
     <div class="wrap">
 {sec_head("Media", "Watch and learn", "Videos from Dawat-e-Islami, and the Madani Channel live in English.", (LIVE_URL, "Watch live"))}
       <div class="videos">
@@ -521,25 +564,24 @@ def home(pre):
       </div>
     </div>
   </section>
-
-{appeal(pre)}</main>
+</main>
 '''
 
-
 # ---------------------------------------------------------------- about
+
 def about(pre):
     ww = "\n".join(f'          <li><a href="{u}" target="_blank" rel="noopener">{n}</a></li>' for n, u in WORLDWIDE)
     provinces = len({c["province"] for c in CENTRES})
     return f'''<main id="main">
-{page_head("About Dawat-e-Islami", "A global, non-political movement for the Qur'an and Sunnah", [("About", "about.html")], pre)}
+{page_head("About Dawat-e-Islami", "A global, non-political movement for the Qur'an and Sunnah, founded in 1981.", [("About", "about.html")], pre, image=img(ABOUT_IMG, pre))}
   <section class="section">
     <div class="wrap split">
       <div class="tile prose">
         <p class="kicker">Who we are</p>
         <h2>Dawat-e-Islami</h2>
-        <p>Dawat-e-Islami is a global, non-political Islamic organization working to spread the teachings of the Qur'an and Sunnah. It was founded in 1981 in Karachi, Pakistan, by Ameer-e-Ahl-e-Sunnat, Hazrat Allama Maulana Muhammad Ilyas Attar Qadri Razavi.</p>
-        <p>Today its departments serve communities in many countries: masajid and Islamic centres, Qur'an classes, Islamic schools, Jamias that train scholars, spiritual cure, funeral services, the Madani Channel and welfare work.</p>
-        <p>Its work rests on four values: the Qur'an and Sunnah, education, welfare and spiritual reform.</p>
+        <p>Dawat-e-Islami is a global, non-political Islamic organization devoted to spreading the teachings of the Qur'an and Sunnah. It was founded on 2 September 1981 in Karachi, Pakistan, by Shaykh-e-Tariqat, Ameer-e-Ahl-e-Sunnat, Hazrat Allama Maulana Muhammad Ilyas Attar Qadri Razavi Ziyai, one of the great Islamic scholars and spiritual guides of our time.</p>
+        <p>His vision is spiritual purification, unity, and raising the moral and religious standards of Muslims everywhere. Guided by compassion, Islamic knowledge and spiritual enlightenment, Dawat-e-Islami has inspired millions of people to live by the Qur'an and Sunnah.</p>
+        <p>Today it works through dozens of departments, each focused on one need: masajid and Islamic centres, Qur'an classes, Islamic schools, Jamias that train scholars, spiritual cure, funeral services, the Madani Channel, and humanitarian welfare.</p>
       </div>
       <div class="tile cream">
         <div class="founder">
@@ -561,13 +603,17 @@ def about(pre):
         <p class="kicker">In Canada</p>
         <h2>Dawat-e-Islami Canada</h2>
         <p>Dawat-e-Islami Canada carries this work into Canadian communities, with {len(CENTRES)} centres in {provinces} provinces and Jamia-tul-Madina campuses in Montreal and Cornwall.</p>
+        <p>Our centres offer:</p>
         <ul>
-          <li>Weekly gatherings for brothers and sisters</li>
-          <li>Friday prayers and daily congregational prayers</li>
-          <li>Qur'an classes for children and adults</li>
-          <li>Weekend Islamic school and youth classes</li>
+          <li>Daily congregational prayers and Jumu'ah</li>
+          <li>Qur'an Tafseer sessions and adult Qur'an reading classes</li>
+          <li>Weekly family gatherings (Ijtima) and gatherings on the blessed nights</li>
+          <li>Madrasa-tul-Madina: Hifz and Nazirah for children</li>
+          <li>Faizan Weekend Islamic School for children in public school</li>
+          <li>Short courses, workshops and youth classes</li>
           <li>Scholarly training at Jamia-tul-Madina</li>
         </ul>
+        <p>All of this follows the <a href="{pre}services/12-religious-activities.html">12 Religious Activities</a> for brothers and the <a href="{pre}services/sisters-8-religious-activities.html">8 Religious Activities</a> for sisters.</p>
         <p><span class="tbd">TBD</span> When Dawat-e-Islami started in Canada, and a few lines of its history.</p>
         <p class="muted">Dawat-e-Islami Canada is a registered Canadian charity, BN {BN}.</p>
       </div>
@@ -586,19 +632,73 @@ def about(pre):
 
 
 # ---------------------------------------------------------------- departments
+def services_page(pre):
+    cards = "\n".join(service_card(sv, pre) for sv in SERVICES)
+    return f'''<main id="main">
+{page_head("What we offer", "Your one-stop destination for Islamic learning and growth: free activities, classes and services for the whole community.", [("Services", "services.html")], pre, image=img(ABOUT_IMG, pre))}
+  <section class="section">
+    <div class="wrap">
+      <div class="cards three">
+{cards}
+      </div>
+      <p class="muted" style="margin-top:24px">Programs and timings vary by centre. <a href="{pre}centres.html">Find your nearest centre</a> or <a href="{pre}events.html">see this week's events</a>.</p>
+    </div>
+  </section>
+</main>
+'''
+
+
+def service_detail(sv):
+    def body(pre):
+        items = ""
+        if sv["items"]:
+            rows = "\n".join(f'''          <li><span class="n">{i}</span><div><b>{t}</b><p>{d}</p></div></li>''' for i, (t, d) in enumerate(sv["items"], 1))
+            items = f'''  <section class="section tight">
+    <div class="wrap">
+{sec_head("Step by step", f"The {len(sv['items'])} activities")}
+      <ol class="numbered">
+{rows}
+      </ol>
+    </div>
+  </section>'''
+        return f'''<main id="main">
+{page_head(sv["title"], sv["short"], [("Services", "services.html"), (sv["title"], "")], pre, image=img(sv["img"], pre), fit="religious-activities" in sv["img"])}
+  <section class="section">
+    <div class="wrap detail">
+      <div class="tile prose">
+        <p class="kicker">About</p>
+        <h2>{sv["title"]}</h2>
+        <p>{sv["intro"]}</p>
+        <p>Timings vary by centre. Contact your nearest centre to take part.</p>
+      </div>
+      <div class="side">
+        <div class="tile sky">
+          <h2 class="h3">Take part</h2>
+          <p>Every activity is free and open to everyone.</p>
+          <div class="actions" style="margin-top:12px"><a class="btn btn-navy" href="{pre}centres.html">Find a centre</a><a class="btn btn-line" href="{pre}events.html">This week's events</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+{items}
+</main>
+'''
+    return body
+
+
 def departments_page(pre):
     cards = "\n".join(dept_card(d, pre) for d in DEPARTMENTS)
     more = "\n".join(f'''        <div class="card"><div class="ic">{svg("dept")}</div><h3>{n}</h3><p>{t}</p></div>''' for n, t in MORE_DEPARTMENTS)
     return f'''<main id="main">
-{page_head("Our departments", "Each department focuses on one area of service, from Qur'an education to welfare and media.", [("Departments", "departments.html")], pre)}
+{page_head("Our departments", "Dawat-e-Islami works through dedicated departments, each focused on one area of service: Qur'an education, scholarship, welfare, media and more.", [("Departments", "departments.html")], pre)}
   <section class="section">
     <div class="wrap">
-      <div class="cards">
+      <div class="cards three">
 {cards}
       </div>
     </div>
   </section>
-  <section class="section tight">
+  <section class="section soft">
     <div class="wrap">
 {sec_head("Also part of Dawat-e-Islami", "More departments")}
       <div class="cards">
@@ -608,6 +708,7 @@ def departments_page(pre):
   </section>
 </main>
 '''
+
 
 
 def dept_detail(d):
@@ -699,13 +800,13 @@ def centre_detail(c):
       <div class="tile sky"><h2 class="h3">Programs at this centre</h2><p class="muted" style="margin-top:6px">A weekly gathering is held at every centre. Call {e(c["phone"])} for this centre's timings. <span class="tbd">TBD</span></p></div>
     </div>
   </section>''')
-        site = (f'<li><b>Website</b><span><a href="{c["site"]}" target="_blank" rel="noopener">{c["site"].replace("https://", "")}</a></span></li>'
+        site = (f'<li><b>Website</b><span>{site_link(c["site"], pre, "dawateislami.ca/" + c["site"].rstrip("/") if not c["site"].startswith("http") else c["site"].replace("https://", ""))}</span></li>'
                 if c["site"] else "")
         note = f' <span class="note">{c["note"]}</span>' if c["note"] else ""
         actions = (f'<a class="btn btn-gold" href="{pre}donate.html?centre={c["slug"]}">Donate</a>'
                    f'<a class="btn btn-ghost" href="{maps_search(c["address"])}" target="_blank" rel="noopener">Get directions</a>')
         if c["site"]:
-            actions += f'<a class="btn btn-ghost" href="{c["site"]}" target="_blank" rel="noopener">Centre website</a>'
+            actions += site_link(c["site"], pre, "Centre website", "btn btn-ghost")
         return f'''<main id="main">
 {page_head(c["name"] + note, c["address"], [("Centres", "centres.html"), (c["name"], "")], pre, actions, img(c["img"], pre))}
   <section class="section">
@@ -873,14 +974,14 @@ def jamia_page(pre):
         </article>''')
     alim = next(x for x in COURSES if x["slug"] == "full-time-alim-course-montreal")
     return f'''<main id="main">
-{page_head("Jamia-tul-Madina", "Dawat-e-Islami's Islamic university, training the next generation of scholars in Canada.", [("Jamia-tul-Madina", "jamia.html")], pre,
+{page_head("Jamia-tul-Madina", "Dawat-e-Islami's Islamic university, training the next generation of scholars in Canada.", [("Jamia-tul-Madina", "jamia.html")], pre, image=img(next(d for d in DEPARTMENTS if d[0] == "jamia")[5], pre), actions=
            f'<a class="btn btn-gold" href="{JAMIA_SITE}" target="_blank" rel="noopener">Visit jamiatulmadina.ca</a><a class="btn btn-ghost" href="{pre}courses/{alim["slug"]}.html">The Aalim course</a>')}
   <section class="section">
     <div class="wrap split">
       <div class="tile prose">
         <p class="kicker">About the Jamia</p>
         <h2>Free scholarly training</h2>
-        <p>Jamia-tul-Madina is Dawat-e-Islami's network of Islamic universities, with more than 1,500 branches worldwide. Students study the traditional Dars-e-Nizami (Aalim) course: Qur'an, Hadith, Islamic law, Arabic and the other Islamic sciences.</p>
+        <p>Jamia-tul-Madina is Dawat-e-Islami's network of Islamic universities, with more than 1,300 institutions and around 110,000 students worldwide. Students study the traditional Dars-e-Nizami (Aalim) course: Qur'an, Hadith, Islamic law, Arabic and the other Islamic sciences.</p>
         <p>In Canada, the Jamia runs a full-time Aalim course in Montreal, free of charge for accepted students, and is opening a new permanent campus in Cornwall, Ontario.</p>
       </div>
       <div class="tile navy" style="display:flex;flex-direction:column;justify-content:center;gap:12px">
@@ -1210,6 +1311,10 @@ def not_found(pre):
 T = " | Dawat-e-Islami Canada"
 write("index.html", "Dawat-e-Islami Canada", "Dawat-e-Islami Canada: masajid, Qur'an classes, weekly gatherings and community programs across Canada.", home)
 write("about.html", "About" + T, "About Dawat-e-Islami, its founder Ameer-e-Ahl-e-Sunnat, and its work in Canada.", about, "about.html")
+write("services.html", "Services" + T, "What Dawat-e-Islami Canada offers: 12 religious activities, sisters' activities, Qur'an classes, short courses and more.", services_page, "services.html")
+for sv in SERVICES:
+    if sv["page"]:
+        write(f"services/{sv['slug']}.html", sv["title"] + T, sv["short"], service_detail(sv), "services.html")
 write("departments.html", "Departments" + T, "The departments of Dawat-e-Islami Canada: Madrasa-tul-Madina, Jamia-tul-Madina, Islamic school and more.", departments_page, "departments.html")
 for d in DEPARTMENTS:
     if d[4]:
@@ -1237,7 +1342,7 @@ _p.write_text(_p.read_text().replace('<meta charset="utf-8">', """<meta charset=
 <script>(function(){var b="/";if(/github\\.io$/.test(location.hostname)){var s=location.pathname.split("/")[1];if(s)b="/"+s+"/";}document.write('<base href="'+b+'">');})()</script>""", 1))
 
 # Old addresses that moved
-MOVED = {"vancouver.html": VANCOUVER_SITE, "prayer-times.html": VANCOUVER_SITE + "prayer-times.html", "services.html": "departments.html"}
+MOVED = {"vancouver.html": VANCOUVER_SITE, "prayer-times.html": VANCOUVER_SITE + "prayer-times.html"}
 for old, new in MOVED.items():
     (ROOT / old).write_text(f'''<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><title>Moved | Dawat-e-Islami Canada</title>
@@ -1251,8 +1356,6 @@ for old, new in MOVED.items():
 /vancouver.html /vancouver/ 301
 /prayer-times /vancouver/prayer-times.html 301
 /prayer-times.html /vancouver/prayer-times.html 301
-/services /departments 301
-/services.html /departments 301
 """)
 (ROOT / "_headers").write_text("""/assets/*
   Cache-Control: public, max-age=604800
