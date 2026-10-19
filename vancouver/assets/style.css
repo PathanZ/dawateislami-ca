@@ -1886,3 +1886,138 @@ tr.at-inactive .at-sn{color:#9aa9a4;text-decoration:line-through}
 .inperson-addr{font-style:normal;margin:8px 0 0;color:var(--ink);line-height:1.5}
 .inperson-addr b{color:var(--green-deep)}
 .inperson-dir{display:inline-flex;align-items:center;gap:4px;min-height:44px;font-weight:700;color:var(--green)}
+
+/* =====================================================================
+   LIGHT THEME (Apple-inspired): white and light-grey sections, dark text,
+   a fresh green for links and buttons, gold only as a small accent.
+   Everything above stays as it was; this layer simply sits on top.
+   ===================================================================== */
+:root{
+  --green:#0d7a5f;--green-deep:#0b4d3d;--green-soft:#e9f5f0;
+  --ink:#1d1d1f;--muted:#6e6e73;--line:#e3e6e8;--paper:#f5f5f7;
+  --gold-ink:#94700c;
+}
+body{background:#fff;color:var(--ink)}
+h1,h2,h3{color:var(--ink)}
+a{color:var(--green)}
+
+/* top bar: date, Bismillah, next prayer */
+.topbar{background:#f5f5f7;color:var(--muted);border-bottom:1px solid var(--line)}
+.topbar .bismillah{color:var(--green-deep)}
+.topbar .next,.topbar .next b{color:var(--ink)}
+.topbar .next b{color:var(--green)}
+.tb-hijri{color:var(--ink)}.tb-greg,.tb-sep{color:var(--muted)}
+.ribbon{background:var(--green-soft);color:var(--green-deep);border-bottom:1px solid var(--line)}
+.ribbon b,.ribbon strong{color:var(--green-deep)}
+
+/* header: white, frosted, thin line */
+.site-header{background:rgba(255,255,255,.88);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line);box-shadow:none}
+.nav a{color:var(--ink);font-weight:500}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--green);background:var(--green-soft)}
+/* Donate: always there, but quiet (like Apple's bag icon at the top right) */
+.nav .nav-donate{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:600;margin-left:6px;padding:8px 12px;border-radius:999px;border:1px solid #cfe5dc;background:#fff}
+.nav .nav-donate svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.nav .nav-donate:hover{background:var(--green-soft)}
+
+/* buttons: Apple-style pills; one filled, one outlined */
+.btn{border-radius:999px;text-transform:none;letter-spacing:0;font-weight:600;font-size:16px;padding:12px 22px;box-shadow:none}
+.btn-green{background:var(--green);color:#fff;border:0}
+.btn-green:hover{background:#0a684f}
+.btn-line,.btn-line-green{background:transparent;border:1.5px solid var(--green);color:var(--green)}
+.btn-gold{background:#fff;color:var(--green);border:1.5px solid var(--green);box-shadow:none}
+
+/* hero: white, text left, today's prayers right (Z pattern) */
+.hero{background:#fff;color:var(--ink)}
+.hero::after{display:none}
+.hero .arabic{color:var(--gold-ink)}
+.hero h1{color:var(--ink);letter-spacing:-.02em}
+.hero .tagline{color:var(--green)}
+.hero p.lead{color:var(--muted)}
+.today{border-top:0;border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.today-list li.is-next{background:var(--green-soft)}
+.today-list li.is-next .p::after{background:var(--green)}
+
+/* sections */
+.weekly{background:#fff}
+.wk{border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.slogan{background:#f5f5f7;border:0}
+.slogan .en{color:var(--ink)}
+.page-head{background:#f5f5f7;color:var(--ink);border-bottom:1px solid var(--line)}
+.page-head::after{display:none}
+.page-head h1{color:var(--ink)}
+.page-head p{color:var(--muted)}
+.page-head .crumbs a,.page-head .crumbs{color:var(--muted)}
+.block.tint,.block.alt{background:#f5f5f7}
+.head .kicker{color:var(--green)}
+
+/* footer: light grey, like Apple */
+.site-footer{background:#f5f5f7;color:var(--muted);border-top:1px solid var(--line)}
+.site-footer h4{color:var(--ink)}
+.site-footer a{color:var(--ink)}
+.site-footer a:hover{color:var(--green)}
+.site-footer .bn{color:var(--muted)}
+.site-footer .legal{border-top-color:var(--line);color:var(--muted)}
+.ft-support{font-size:14.5px}
+.ft-support a{color:var(--green)!important;font-weight:600}
+
+/* phone bottom bar: white, frosted; Donate looks like the others */
+@media (max-width:900px){
+  .mbar{background:rgba(255,255,255,.92);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border-top:1px solid var(--line);box-shadow:0 -4px 16px rgba(0,0,0,.05)}
+  .mbar a{color:var(--ink)}
+  .mbar svg{stroke:var(--green)}
+  .mbar a.mbar-don{color:var(--ink)}
+  .mbar a.mbar-don svg{fill:none;stroke:var(--green)}
+  .nav .nav-donate{margin:6px 0 0;justify-content:center}
+}
+
+/* slideshow area: light background */
+.promo{background:#f5f5f7}
+.promo-play{border-color:#c7c7cc;color:var(--ink)}
+.promo-dot span{background:#d2d2d7}
+.promo-dot span::after,.promo-dot.done span::after{background:var(--ink)}
+.promo-frame{box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.promo+.hero .wrap{padding-top:40px}
+/* top bar date readable on the light background */
+.topbar .tb-date,.topbar .tb-sep,.topbar .tb-greg{color:var(--muted)}
+.topbar .tb-hijri{color:var(--ink)}
+/* map: lighter green Canada */
+.cm-land{fill:#23856a}
+.cm-lake{fill:#e7f1f3}
+
+/* ---- Bigger slideshow pictures ---- */
+/* computers: the slideshow uses more of the screen width and grows taller with it */
+@media (min-width:901px){
+  .promo .wrap{max-width:1480px}
+  .promo-frame{height:clamp(440px,calc((min(100vw,1480px) - 40px) / 2.56),600px)}
+}
+/* phones: edge to edge, bigger guest photo, banners shown 50% larger and slowly panning left to right */
+@media (max-width:640px){
+  .promo{padding-top:0}
+  .promo .wrap{padding-left:0;padding-right:0}
+  .promo-frame{border-radius:0;box-shadow:none}
+  .ps-link:focus-visible{border-radius:0}
+  .ps-guest .ps-art{height:340px}
+  .ps-banner .pb-img{height:calc(100vw * 1.5 / var(--r,2.6));overflow:hidden}
+  .ps-banner .pb-main{position:absolute;top:0;left:0;height:100%;width:auto;max-width:none;animation:pbPan 9s ease-in-out infinite alternate}
+  @keyframes pbPan{from{transform:translateX(0)}to{transform:translateX(calc(100vw - 100%))}}
+  .promo-controls{padding:8px 16px 0}
+}
+@media (max-width:640px) and (prefers-reduced-motion:reduce){
+  .ps-banner .pb-main{animation:none;left:50%;transform:translateX(-50%)}
+}
+/* lighter slide backgrounds */
+.ps-guest{background:linear-gradient(160deg,#127257,#0d5c48)}
+.ps-guest .ps-art::after{background:linear-gradient(90deg,#127257 0,rgba(18,114,87,.75) 20%,rgba(18,114,87,0) 42%),linear-gradient(0deg,rgba(13,92,72,.7) 0,transparent 26%)}
+.ps-relief{background:#fff}
+.ps-relief .ps-link{color:var(--ink)}
+.ps-relief .ps-kicker{color:var(--green)}
+.ps-relief .ps-title{color:var(--ink)}
+.ps-relief .ps-text{color:var(--muted)}
+.ps-banner.ps-relief .ps-btn,.ps-banner.ps-academy .ps-btn{background:var(--green);color:#fff}
+.ps-academy{background:#f5f5f7}
+@media (max-width:640px){
+  .ps-guest .ps-art::after{background:linear-gradient(0deg,#0d5c48 0,rgba(13,92,72,.6) 18%,transparent 45%)}
+}
+.ps-guest{background:#106a51}
+.ps-guest .ps-art::after{background:linear-gradient(90deg,#106a51 0,rgba(16,106,81,.75) 20%,rgba(16,106,81,0) 42%),linear-gradient(0deg,rgba(16,106,81,.7) 0,transparent 26%)}
+@media (max-width:640px){.ps-guest .ps-art::after{background:linear-gradient(0deg,#106a51 0,rgba(16,106,81,.6) 18%,transparent 45%)}}

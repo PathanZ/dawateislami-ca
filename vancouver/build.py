@@ -121,7 +121,7 @@ def header(current):
       {link("about.html#services", "Services", None)}
       {link("about.html", "About us", "about")}
       {link("index.html#visit", "Visit us", None)}
-      <a class="btn btn-gold" href="donate.html">Donate now</a>
+      <a class="nav-donate" href="donate.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>Donate</span></a>
     </nav>
   </div>
 </header>
@@ -132,9 +132,10 @@ FOOTER = f'''<footer class="site-footer" id="contact">
   <div class="wrap">
     <div class="cols">
       <div>
-        <img class="footer-logo" src="assets/img/logo-vancouver-white.png" width="900" height="242" alt="Dawat-e-Islami Vancouver">
+        <img class="footer-logo" src="assets/img/logo-vancouver.png" width="900" height="242" alt="Dawat-e-Islami Vancouver">
         <p><b>{V_NAME}</b> is a centre of Dawat-e-Islami, a global, non-political movement spreading the teachings of the Qur'an and Sunnah.</p>
         <p class="bn">Registered Canadian charity · BN {BN}</p>
+        <p class="ft-support">The masjid is kept open by the community. <a href="donate.html">Support Faizan e Madina <span aria-hidden="true">›</span></a></p>
       </div>
       <div>
         <h4>Contact</h4>
@@ -294,8 +295,8 @@ HOME = f'''<main id="top">
         <p class="tagline">Dawat-e-Islami · Surrey, BC</p>
         <p class="lead">Our Islamic Centre serves the Lower Mainland with the five daily prayers, two Jummah congregations, a weekly Ijtima and Qur'an classes for all ages.</p>
         <div class="actions">
-          <a class="btn btn-gold" href="donate.html">Donate now</a>
-          <a class="btn btn-line" href="#visit">Get directions</a>
+          <a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&amp;query={V_MAP_Q}" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn btn-line" href="prayer-times.html">Prayer timetable <span aria-hidden="true">›</span></a>
         </div>
       </div>
 {TODAY_CARD}
