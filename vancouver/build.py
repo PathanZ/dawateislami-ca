@@ -98,7 +98,7 @@ def header(current):
     def link(href, text, key):
         cur = ' aria-current="page"' if key == current else ""
         return f'<a href="{href}"{cur}>{text}</a>'
-    return f'''<a class="ribbon" href="index.html#ijtima">
+    return f'''<a class="ribbon" href="about.html#ijtima">
   <span class="ribbon-in"><b>Weekly Ijtima</b> <span id="ijtimaWhen">every Thursday at 7:00 PM</span> <span class="ribbon-sep" aria-hidden="true">·</span> <span class="ribbon-all">All are welcome</span> <span class="ribbon-go" aria-hidden="true">→</span></span>
 </a>
 <div class="topbar">
@@ -117,9 +117,9 @@ def header(current):
       {link("events.html", "Events", "events")}
       {link("tutoring.html", "Free tutoring", "tutoring") if FUTURE else ""}
       {link("volunteer.html", "Volunteer", "volunteer") if FUTURE else ""}
-      {link("index.html#ijtima", "Weekly Ijtima", None)}
-      {link("index.html#services", "Services", None)}
-      {link("index.html#about", "About us", None)}
+      {link("about.html#ijtima", "Weekly Ijtima", None)}
+      {link("about.html#services", "Services", None)}
+      {link("about.html", "About us", "about")}
       {link("index.html#visit", "Visit us", None)}
       <a class="btn btn-gold" href="donate.html">Donate now</a>
     </nav>
@@ -150,12 +150,12 @@ FOOTER = f'''<footer class="site-footer" id="contact">
         <ul>
           <li><a href="prayer-times.html">Prayer times</a></li>
           <li><a href="events.html">Events</a></li>
-          <li><a href="index.html#ijtima">Weekly Ijtima</a></li>
-          <li><a href="index.html#maghfirah">Dua-e-Maghfirah</a></li>
-          <li><a href="index.html#school">Weekend Islamic School</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.html#books">Free Islamic books</a></li>
-          <li><a href="index.html#about">About us</a></li>
+          <li><a href="about.html#ijtima">Weekly Ijtima</a></li>
+          <li><a href="about.html#maghfirah">Dua-e-Maghfirah</a></li>
+          <li><a href="about.html#school">Weekend Islamic School</a></li>
+          <li><a href="about.html#services">Services</a></li>
+          <li><a href="about.html#books">Free Islamic books</a></li>
+          <li><a href="about.html">About us</a></li>
           {'<li><a href="tutoring.html">Free tutoring (Grades 2–8)</a></li><li><a href="volunteer.html">Volunteer with us</a></li>' if FUTURE else ''}
           <li><a href="past-events.html">Past events</a></li>
           <li><a href="donate.html">Donate</a></li>
@@ -314,7 +314,7 @@ HOME = f'''<main id="top">
         <p class="wk-note">A speech begins 30 minutes before each Khutbah. Brothers and sisters welcome.</p>
         <a class="wk-go" href="events.html">See the Jumu'ah poster →</a>
       </div>
-      <a class="wk wk-ijtima" href="#ijtima">
+      <a class="wk wk-ijtima" href="about.html#ijtima">
         <div class="wk-head"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M5 21v-6a7 7 0 0114 0v6M3 21h18M9 21v-3h6v3"/></svg><span>Every Thursday</span></div>
         <h2>Weekly Ijtima</h2>
         <div class="jm"><p class="jm-label">Thursday night</p><p class="jm-time">7:00 <small>PM</small></p><p class="jm-sub">Tilawat · Naat · Bayan · Zikr · Dua</p></div>
@@ -324,21 +324,133 @@ HOME = f'''<main id="top">
     </div>
   </section>
 
-  <section class="block events-home" id="events">
-    <div class="wrap">
-      <div class="head">
-        <p class="kicker">What's coming up</p>
-        <h2>Upcoming events</h2>
-        <div class="ornament" aria-hidden="true">✦</div>
-      </div>
-      <div class="events-grid" id="eventsGrid" data-limit="3"></div>
-      <p class="center-cta"><a class="btn btn-green" href="events.html">See all events</a></p>
-    </div>
-  </section>
-
   <section class="slogan" aria-label="Madani Maqsad">
     <div class="wrap">
       <p class="en">"I must strive to reform myself and the people of the entire world, <span class="ar-inline" lang="ar" dir="rtl">ان شاءالله عزوجل</span>"</p>
+    </div>
+  </section>
+
+  <section class="block" id="centres" aria-label="Dawat-e-Islami centres">
+    <div class="wrap global">
+      <div class="cm-head">
+        <h3 id="cmHeading">Dawat-e-Islami across Canada</h3>
+        <div class="cm-tabs" role="tablist" aria-label="Choose a map">
+          <button type="button" role="tab" id="tab-ca" aria-controls="map-ca" aria-selected="true" class="is-on" data-map="ca" data-title="Dawat-e-Islami across Canada">Canada</button>
+          <button type="button" role="tab" id="tab-na" aria-controls="map-na" aria-selected="false" tabindex="-1" data-map="na" data-title="Dawat-e-Islami across North America">North America</button>
+          <button type="button" role="tab" id="tab-wd" aria-controls="map-wd" aria-selected="false" tabindex="-1" data-map="wd" data-title="From Vancouver to the Global Madani Markaz">World</button>
+        </div>
+      </div>
+      <div class="wm-filters" role="group" aria-label="Show on the map">
+        <button type="button" class="is-on" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="centre" aria-pressed="false">Islamic Centres</button>
+        <button type="button" data-filter="education" aria-pressed="false">Jamia &amp; School</button>
+      </div>
+      <div class="wm-frame cm-frame" id="map-ca" role="tabpanel" aria-labelledby="tab-ca">
+        {CANADA_MAP}
+        {CANADA_MAP_PHONE}
+      </div>
+      <div class="wm-frame cm-frame" id="map-na" role="tabpanel" aria-labelledby="tab-na" hidden>
+        {NA_MAP}
+        {NA_MAP_PHONE}
+      </div>
+      <div class="wm-frame cm-frame cm-world" id="map-wd" role="tabpanel" aria-labelledby="tab-wd" hidden>
+        {WORLD_MAP}
+        {WORLD_MAP_PHONE}
+      </div>
+      <aside class="dum-card" aria-labelledby="dumTitle">
+        <span class="dum-ic" aria-hidden="true"><svg viewBox="-11 -11 22 22"><path d="M0 -3.5C-2.2 -5 -5 -5.2 -7.5 -4.4V5C-5 4.2 -2.2 4.4 0 5.9C2.2 4.4 5 4.2 7.5 5V-4.4C5 -5.2 2.2 -5 0 -3.5Z"/><path d="M0 -3.5V5.9" class="sp"/></svg></span>
+        <div>
+          <p class="dum-kicker">One of a kind in North America</p>
+          <h4 id="dumTitle">Dar-ul-Madinah, Sacramento</h4>
+          <p>A full-time Islamic elementary school for boys and girls, from Kindergarten to Grade 5. Children follow the regular school curriculum together with Qur'an and Islamic studies, in an Islamic environment.</p>
+          <button type="button" class="dum-show" data-pick="Dar-ul-Madinah Sacramento">Show on map →</button>
+        </div>
+      </aside>
+      <ul class="wm-legend" aria-label="Map key">
+        <li><span class="k k-home" aria-hidden="true"></span>Faizan e Madina Vancouver (that's us)</li>
+        <li><span class="k k-canada" aria-hidden="true"></span>Islamic Centres</li>
+        <li class="k-school-li"><span class="k k-school" aria-hidden="true"><svg viewBox="-11 -11 22 22" width="20" height="20"><circle r="10.5" class="cm-school-bg"/><path d="M0 -3.5C-2.2 -5 -5 -5.2 -7.5 -4.4V5C-5 4.2 -2.2 4.4 0 5.9C2.2 4.4 5 4.2 7.5 5V-4.4C5 -5.2 2.2 -5 0 -3.5Z" class="cm-book"/></svg></span>Dar-ul-Madinah (Islamic elementary school)</li>
+        <li class="k-hq-li"><span class="k k-hq" aria-hidden="true">★</span>Global headquarters, Karachi</li>
+        <li class="k-glow-li"><span class="k k-glow" aria-hidden="true"></span>Places with Dawat-e-Islami centres (tap a dot for details)</li>
+        <li><span class="k k-uni" aria-hidden="true"><svg viewBox="-11 -11 22 22" width="18" height="18"><circle r="11" class="cm-uni-bg"/><path d="M-6.5 -1.2 0 -4.6 6.5 -1.2 0 2.2z" class="cm-cap"/><path d="M-3.8 0.4v2.6c1.2 1.3 6.4 1.3 7.6 0v-2.6" class="cm-cap2"/><path d="M5.6 -0.8v3.6" class="cm-cap2"/></svg></span>Jamia-tul-Madinah (Islamic university)</li>
+      </ul>
+      <div class="wm-detail-row">
+        <div class="wm-detail" id="wmDetail" aria-live="polite">
+          <p class="wm-detail-k">Selected location</p>
+          <h3 id="wmName">Faizan e Madina Vancouver</h3>
+          <p class="wm-place" id="wmPlace">7062 134 St, Surrey, BC</p>
+          <p id="wmInfo">Our Islamic Centre, serving the Vancouver area.</p>
+          <p class="wm-src" id="wmSrc" hidden><a id="wmSrcLink" href="#" target="_blank" rel="noopener">Source</a></p>
+        </div>
+        <div class="wm-list">
+          <p class="wm-detail-k">Featured locations</p>
+          <button type="button" data-name="Global Madani Markaz, Faizan-e-Madina" data-place="Karachi, Pakistan" data-info="Dawat-e-Islami's global headquarters, on Main University Road, Karachi. Dawat-e-Islami was founded here in 1981." data-src="https://www.dawateislami.net/pk/about-us"><b>Global Madni Markaz</b><span>Karachi, Pakistan · Global headquarters</span></button>
+          <button type="button" data-pick="Faizan e Madina Vancouver"><b>Faizan-e-Madina Vancouver</b><span>British Columbia</span></button>
+          <button type="button" data-pick="Faizan-e-Madina Calgary"><b>Faizan-e-Madina Calgary</b><span>Alberta</span></button>
+          <button type="button" data-pick="Faizan-e-Madina Hamilton"><b>Faizan-e-Madina Hamilton</b><span>Ontario</span></button>
+          <button type="button" data-pick="Faizan-e-Madina Montréal"><b>Faizan-e-Madina Montréal</b><span>Quebec</span></button>
+          <button type="button" data-pick="Jamia-tul-Madinah Montréal"><b>Jamia-tul-Madinah Montréal</b><span>Quebec</span></button>
+        </div>
+      </div>
+      <ul class="wm-stats">
+        <li><b>1981</b><span>Founded in Karachi</span></li>
+        <li><b>1,500+</b><span>Jamia-tul-Madina branches worldwide</span></li>
+        <li><b>11</b><span>Islamic Centres across Canada</span></li>
+        <li><b>2</b><span>Jamia-tul-Madinah campuses in Canada</span></li>
+      </ul>
+      <p class="wm-note">Tap any symbol on the map, or a featured location, to see its details. Switch between Canada, North America and the world with the tabs above the map.</p>
+    </div>
+  </section>
+
+  <section class="block tint" id="visit">
+    <div class="wrap visit">
+      <div>
+        <div class="head left">
+          <p class="kicker">Visit us</p>
+          <h2>Find {V_NAME}</h2>
+          <div class="ornament" aria-hidden="true">✦</div>
+        </div>
+        <ul>
+          <li><b>Address</b><span>{V_ADDRESS}</span></li>
+          <li><b>Open</b><span>Daily for all five prayers</span></li>
+          <li><b>Jummah</b><span>{JUMMAH}</span></li>
+          <li><b>Phone</b><span><a href="tel:{V_TEL}">{V_PHONE}</a></span></li>
+          <li><b>Parking</b><span>Available</span></li>
+        </ul>
+        <a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&amp;query={V_MAP_Q}" target="_blank" rel="noopener">Get directions</a>
+      </div>
+      <div class="map-slot">
+        <iframe title="Map of {V_NAME}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q={V_MAP_Q}&amp;output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+'''
+
+ABOUT_MAIN = f'''<main>
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span>›</span> <span aria-current="page">About us</span></nav>
+      <h1>About us</h1>
+      <p>Who we are, our weekly Ijtima, Dua-e-Maghfirah, the Weekend Islamic School, our services and free Islamic books.</p>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap about">
+      <div>
+        <div class="head left">
+          <p class="kicker">About us</p>
+          <h2>Part of the global family of Dawat-e-Islami</h2>
+          <div class="ornament" aria-hidden="true">✦</div>
+        </div>
+        <p>Dawat-e-Islami was founded in 1981 in Karachi by Ameer-e-Ahl-e-Sunnat, Maulana Muhammad Ilyas Attar Qadri. Today it serves communities around the world through Qur'an education, Islamic scholarship and welfare work.</p>
+        <p>{V_NAME} is Dawat-e-Islami's centre for the Vancouver area, one of several Faizan e Madina centres across Canada.</p>
+        <p>{tbc("Add: a few lines about the centre's history in Surrey")}</p>
+      </div>
+      <div class="photo-slot">
+        <div><strong>Photo</strong><span>The Islamic Centre, to be added</span></div>
+      </div>
     </div>
   </section>
 
@@ -562,132 +674,10 @@ HOME = f'''<main id="top">
       <cite>Sahih al-Bukhari, Hadith 5027</cite>
     </div>
   </section>
-
-  <section class="block alt" id="donate">
-    <div class="wrap donate-teaser">
-      <div>
-        <p class="kicker">Support us</p>
-        <h2>Your donation keeps our Islamic Centre going</h2>
-        <p>Give Sadaqah, Zakat or Fitra online or by Interac e-Transfer, or sponsor a scholar's education. Every donation receives an official tax receipt.</p>
-      </div>
-      <div class="teaser-actions">
-        <a class="btn btn-gold" href="donate.html">Donate now</a>
-        <a class="btn btn-line-green" href="tax-receipt.html">Request a tax receipt</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="about">
-    <div class="wrap about">
-      <div>
-        <div class="head left">
-          <p class="kicker">About us</p>
-          <h2>Part of the global family of Dawat-e-Islami</h2>
-          <div class="ornament" aria-hidden="true">✦</div>
-        </div>
-        <p>Dawat-e-Islami was founded in 1981 in Karachi by Ameer-e-Ahl-e-Sunnat, Maulana Muhammad Ilyas Attar Qadri. Today it serves communities around the world through Qur'an education, Islamic scholarship and welfare work.</p>
-        <p>{V_NAME} is Dawat-e-Islami's centre for the Vancouver area, one of several Faizan e Madina centres across Canada.</p>
-        <p>{tbc("Add: a few lines about the centre's history in Surrey")}</p>
-      </div>
-      <div class="photo-slot">
-        <div><strong>Photo</strong><span>The Islamic Centre, to be added</span></div>
-      </div>
-    </div>
-    <div class="wrap global">
-      <div class="cm-head">
-        <h3 id="cmHeading">Dawat-e-Islami across Canada</h3>
-        <div class="cm-tabs" role="tablist" aria-label="Choose a map">
-          <button type="button" role="tab" id="tab-ca" aria-controls="map-ca" aria-selected="true" class="is-on" data-map="ca" data-title="Dawat-e-Islami across Canada">Canada</button>
-          <button type="button" role="tab" id="tab-na" aria-controls="map-na" aria-selected="false" tabindex="-1" data-map="na" data-title="Dawat-e-Islami across North America">North America</button>
-          <button type="button" role="tab" id="tab-wd" aria-controls="map-wd" aria-selected="false" tabindex="-1" data-map="wd" data-title="From Vancouver to the Global Madani Markaz">World</button>
-        </div>
-      </div>
-      <div class="wm-filters" role="group" aria-label="Show on the map">
-        <button type="button" class="is-on" data-filter="all" aria-pressed="true">All</button>
-        <button type="button" data-filter="centre" aria-pressed="false">Islamic Centres</button>
-        <button type="button" data-filter="education" aria-pressed="false">Jamia &amp; School</button>
-      </div>
-      <div class="wm-frame cm-frame" id="map-ca" role="tabpanel" aria-labelledby="tab-ca">
-        {CANADA_MAP}
-        {CANADA_MAP_PHONE}
-      </div>
-      <div class="wm-frame cm-frame" id="map-na" role="tabpanel" aria-labelledby="tab-na" hidden>
-        {NA_MAP}
-        {NA_MAP_PHONE}
-      </div>
-      <div class="wm-frame cm-frame cm-world" id="map-wd" role="tabpanel" aria-labelledby="tab-wd" hidden>
-        {WORLD_MAP}
-        {WORLD_MAP_PHONE}
-      </div>
-      <aside class="dum-card" aria-labelledby="dumTitle">
-        <span class="dum-ic" aria-hidden="true"><svg viewBox="-11 -11 22 22"><path d="M0 -3.5C-2.2 -5 -5 -5.2 -7.5 -4.4V5C-5 4.2 -2.2 4.4 0 5.9C2.2 4.4 5 4.2 7.5 5V-4.4C5 -5.2 2.2 -5 0 -3.5Z"/><path d="M0 -3.5V5.9" class="sp"/></svg></span>
-        <div>
-          <p class="dum-kicker">One of a kind in North America</p>
-          <h4 id="dumTitle">Dar-ul-Madinah, Sacramento</h4>
-          <p>A full-time Islamic elementary school for boys and girls, from Kindergarten to Grade 5. Children follow the regular school curriculum together with Qur'an and Islamic studies, in an Islamic environment.</p>
-          <button type="button" class="dum-show" data-pick="Dar-ul-Madinah Sacramento">Show on map →</button>
-        </div>
-      </aside>
-      <ul class="wm-legend" aria-label="Map key">
-        <li><span class="k k-home" aria-hidden="true"></span>Faizan e Madina Vancouver (that's us)</li>
-        <li><span class="k k-canada" aria-hidden="true"></span>Islamic Centres</li>
-        <li class="k-school-li"><span class="k k-school" aria-hidden="true"><svg viewBox="-11 -11 22 22" width="20" height="20"><circle r="10.5" class="cm-school-bg"/><path d="M0 -3.5C-2.2 -5 -5 -5.2 -7.5 -4.4V5C-5 4.2 -2.2 4.4 0 5.9C2.2 4.4 5 4.2 7.5 5V-4.4C5 -5.2 2.2 -5 0 -3.5Z" class="cm-book"/></svg></span>Dar-ul-Madinah (Islamic elementary school)</li>
-        <li class="k-hq-li"><span class="k k-hq" aria-hidden="true">★</span>Global headquarters, Karachi</li>
-        <li class="k-glow-li"><span class="k k-glow" aria-hidden="true"></span>Places with Dawat-e-Islami centres (tap a dot for details)</li>
-        <li><span class="k k-uni" aria-hidden="true"><svg viewBox="-11 -11 22 22" width="18" height="18"><circle r="11" class="cm-uni-bg"/><path d="M-6.5 -1.2 0 -4.6 6.5 -1.2 0 2.2z" class="cm-cap"/><path d="M-3.8 0.4v2.6c1.2 1.3 6.4 1.3 7.6 0v-2.6" class="cm-cap2"/><path d="M5.6 -0.8v3.6" class="cm-cap2"/></svg></span>Jamia-tul-Madinah (Islamic university)</li>
-      </ul>
-      <div class="wm-detail-row">
-        <div class="wm-detail" id="wmDetail" aria-live="polite">
-          <p class="wm-detail-k">Selected location</p>
-          <h3 id="wmName">Faizan e Madina Vancouver</h3>
-          <p class="wm-place" id="wmPlace">7062 134 St, Surrey, BC</p>
-          <p id="wmInfo">Our Islamic Centre, serving the Vancouver area.</p>
-          <p class="wm-src" id="wmSrc" hidden><a id="wmSrcLink" href="#" target="_blank" rel="noopener">Source</a></p>
-        </div>
-        <div class="wm-list">
-          <p class="wm-detail-k">Featured locations</p>
-          <button type="button" data-name="Global Madani Markaz, Faizan-e-Madina" data-place="Karachi, Pakistan" data-info="Dawat-e-Islami's global headquarters, on Main University Road, Karachi. Dawat-e-Islami was founded here in 1981." data-src="https://www.dawateislami.net/pk/about-us"><b>Global Madni Markaz</b><span>Karachi, Pakistan · Global headquarters</span></button>
-          <button type="button" data-pick="Faizan e Madina Vancouver"><b>Faizan-e-Madina Vancouver</b><span>British Columbia</span></button>
-          <button type="button" data-pick="Faizan-e-Madina Calgary"><b>Faizan-e-Madina Calgary</b><span>Alberta</span></button>
-          <button type="button" data-pick="Faizan-e-Madina Hamilton"><b>Faizan-e-Madina Hamilton</b><span>Ontario</span></button>
-          <button type="button" data-pick="Faizan-e-Madina Montréal"><b>Faizan-e-Madina Montréal</b><span>Quebec</span></button>
-          <button type="button" data-pick="Jamia-tul-Madinah Montréal"><b>Jamia-tul-Madinah Montréal</b><span>Quebec</span></button>
-        </div>
-      </div>
-      <ul class="wm-stats">
-        <li><b>1981</b><span>Founded in Karachi</span></li>
-        <li><b>1,500+</b><span>Jamia-tul-Madina branches worldwide</span></li>
-        <li><b>11</b><span>Islamic Centres across Canada</span></li>
-        <li><b>2</b><span>Jamia-tul-Madinah campuses in Canada</span></li>
-      </ul>
-      <p class="wm-note">Tap any symbol on the map, or a featured location, to see its details. Switch between Canada, North America and the world with the tabs above the map.</p>
-    </div>
-  </section>
-
-  <section class="block tint" id="visit">
-    <div class="wrap visit">
-      <div>
-        <div class="head left">
-          <p class="kicker">Visit us</p>
-          <h2>Find {V_NAME}</h2>
-          <div class="ornament" aria-hidden="true">✦</div>
-        </div>
-        <ul>
-          <li><b>Address</b><span>{V_ADDRESS}</span></li>
-          <li><b>Open</b><span>Daily for all five prayers</span></li>
-          <li><b>Jummah</b><span>{JUMMAH}</span></li>
-          <li><b>Phone</b><span><a href="tel:{V_TEL}">{V_PHONE}</a></span></li>
-          <li><b>Parking</b><span>Available</span></li>
-        </ul>
-        <a class="btn btn-green" href="https://www.google.com/maps/search/?api=1&amp;query={V_MAP_Q}" target="_blank" rel="noopener">Get directions</a>
-      </div>
-      <div class="map-slot">
-        <iframe title="Map of {V_NAME}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q={V_MAP_Q}&amp;output=embed"></iframe>
-      </div>
-    </div>
-  </section>
 </main>
 '''
+
+
 
 DONATE_MAIN = f'''<main>
   <section class="page-head">
@@ -939,7 +929,7 @@ EVENTS_MAIN = f'''<main>
   </section>
   <div class="wrap pt-main">
     <div class="events-grid" id="eventsGrid"></div>
-    <p class="muted centres-note">Every Thursday at 7:00 PM: <a href="index.html#ijtima">Weekly Ijtima</a>, open to everyone.</p>
+    <p class="muted centres-note">Every Thursday at 7:00 PM: <a href="about.html#ijtima">Weekly Ijtima</a>, open to everyone.</p>
     <a class="past-teaser" href="past-events.html"><span class="pt-ic" aria-hidden="true">↺</span><span><b>Our events through the years</b><small>See every gathering we've held, newest first</small></span><span class="pt-go" aria-hidden="true">→</span></a>
   </div>
 </main>
@@ -1040,6 +1030,9 @@ pages = {
     "index.html": (head(f"{V_NAME} | Dawat-e-Islami",
                         f"Prayer times, Jummah, weekly Ijtima, Qur'an classes and donations at {V_NAME}, 7062 134 Street, Surrey, BC.")
                    + header("home") + HOME),
+    "about.html": (head(f"About us | {V_NAME}",
+                        f"About {V_NAME}: Dawat-e-Islami in Surrey, the Thursday Weekly Ijtima and Dua-e-Maghfirah, the Weekend Islamic School, services and free Islamic books.", "about.html")
+                   + header("about") + ABOUT_MAIN),
     "prayer-times.html": (head(f"Prayer times | {V_NAME}",
                                f"Monthly prayer and jama'at times for {V_NAME} in Surrey, BC (Hanafi).", "prayer-times.html")
                           + header("prayer") + PT_MAIN),
