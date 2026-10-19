@@ -818,7 +818,7 @@
       return '<div class="pslide ps-'+style+'" role="group" aria-roledescription="slide" aria-label="'+(i+1)+' of '+n+'">'+tag+'</div>';
     }).join('');
     var slides=[].slice.call(track.children);
-    // banner pictures: remember their shape so phones can show them 50% bigger
+    // banner pictures: remember their shape so phones can show the whole banner
     [].forEach.call(track.querySelectorAll('.pb-main'),function(img){
       function setR(){ if(img.naturalWidth) img.parentNode.style.setProperty('--r',(img.naturalWidth/img.naturalHeight).toFixed(3)); }
       if(img.complete) setR(); else img.addEventListener('load',setR);
