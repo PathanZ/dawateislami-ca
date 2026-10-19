@@ -98,7 +98,7 @@ def header(current):
     def link(href, text, key):
         cur = ' aria-current="page"' if key == current else ""
         return f'<a href="{href}"{cur}>{text}</a>'
-    return f'''<a class="ribbon" href="about.html#ijtima">
+    return f'''<a class="ribbon" href="ijtima.html">
   <span class="ribbon-in"><b>Weekly Ijtima</b> <span id="ijtimaWhen">every Thursday at 7:00 PM</span> <span class="ribbon-sep" aria-hidden="true">·</span> <span class="ribbon-all">All are welcome</span> <span class="ribbon-go" aria-hidden="true">→</span></span>
 </a>
 <div class="topbar">
@@ -117,8 +117,9 @@ def header(current):
       {link("events.html", "Events", "events")}
       {link("tutoring.html", "Free tutoring", "tutoring") if FUTURE else ""}
       {link("volunteer.html", "Volunteer", "volunteer") if FUTURE else ""}
-      {link("about.html#ijtima", "Weekly Ijtima", None)}
-      {link("about.html#services", "Services", None)}
+      {link("ijtima.html", "Weekly Ijtima", "ijtima")}
+      {link("school.html", "School", "school")}
+      {link("services.html", "Services", "services")}
       {link("about.html", "About us", "about")}
       {link("index.html#visit", "Visit us", None)}
       <a class="nav-donate" href="donate.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>Donate</span></a>
@@ -151,11 +152,11 @@ FOOTER = f'''<footer class="site-footer" id="contact">
         <ul>
           <li><a href="prayer-times.html">Prayer times</a></li>
           <li><a href="events.html">Events</a></li>
-          <li><a href="about.html#ijtima">Weekly Ijtima</a></li>
-          <li><a href="about.html#maghfirah">Dua-e-Maghfirah</a></li>
-          <li><a href="about.html#school">Weekend Islamic School</a></li>
-          <li><a href="about.html#services">Services</a></li>
-          <li><a href="about.html#books">Free Islamic books</a></li>
+          <li><a href="ijtima.html">Weekly Ijtima</a></li>
+          <li><a href="ijtima.html#maghfirah">Dua-e-Maghfirah</a></li>
+          <li><a href="school.html">Weekend Islamic School</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="books.html">Free Islamic books</a></li>
           <li><a href="about.html">About us</a></li>
           {'<li><a href="tutoring.html">Free tutoring (Grades 2–8)</a></li><li><a href="volunteer.html">Volunteer with us</a></li>' if FUTURE else ''}
           <li><a href="past-events.html">Past events</a></li>
@@ -315,7 +316,7 @@ HOME = f'''<main id="top">
         <p class="wk-note">A speech begins 30 minutes before each Khutbah. Brothers and sisters welcome.</p>
         <a class="wk-go" href="events.html">See the Jumu'ah poster →</a>
       </div>
-      <a class="wk wk-ijtima" href="about.html#ijtima">
+      <a class="wk wk-ijtima" href="ijtima.html">
         <div class="wk-head"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M5 21v-6a7 7 0 0114 0v6M3 21h18M9 21v-3h6v3"/></svg><span>Every Thursday</span></div>
         <h2>Weekly Ijtima</h2>
         <div class="jm"><p class="jm-label">Thursday night</p><p class="jm-time">7:00 <small>PM</small></p><p class="jm-sub">Tilawat · Naat · Bayan · Zikr · Dua</p></div>
@@ -328,6 +329,15 @@ HOME = f'''<main id="top">
   <section class="slogan" aria-label="Madani Maqsad">
     <div class="wrap">
       <p class="en">"I must strive to reform myself and the people of the entire world, <span class="ar-inline" lang="ar" dir="rtl">ان شاءالله عزوجل</span>"</p>
+    </div>
+  </section>
+
+  <section class="block hadees" aria-labelledby="hadeesTitle">
+    <div class="wrap">
+      <p class="kicker" id="hadeesTitle">Hadees of the week</p>
+      <p class="arabic" lang="ar">خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ</p>
+      <blockquote>The best among you is the one who learns the Qur'an and teaches it.</blockquote>
+      <cite>Sahih al-Bukhari, Hadith 5027</cite>
     </div>
   </section>
 
@@ -433,7 +443,7 @@ ABOUT_MAIN = f'''<main>
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span>›</span> <span aria-current="page">About us</span></nav>
       <h1>About us</h1>
-      <p>Who we are, our weekly Ijtima, Dua-e-Maghfirah, the Weekend Islamic School, our services and free Islamic books.</p>
+      <p>Faizan e Madina Vancouver, a centre of Dawat-e-Islami.</p>
     </div>
   </section>
 
@@ -452,6 +462,17 @@ ABOUT_MAIN = f'''<main>
       <div class="photo-slot">
         <div><strong>Photo</strong><span>The Islamic Centre, to be added</span></div>
       </div>
+    </div>
+  </section>
+</main>
+'''
+
+IJTIMA_MAIN = f'''<main>
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span>›</span> <span aria-current="page">Weekly Ijtima</span></nav>
+      <h1>Weekly Ijtima</h1>
+      <p>Every Thursday at 7:00 PM, open to everyone, with Dua-e-Maghfirah for those who have passed away.</p>
     </div>
   </section>
 
@@ -555,6 +576,17 @@ ABOUT_MAIN = f'''<main>
       </form>
     </div>
   </section>
+</main>
+'''
+
+SCHOOL_MAIN = f'''<main>
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span>›</span> <span aria-current="page">Weekend Islamic School</span></nav>
+      <h1>Faizan Weekend Islamic School</h1>
+      <p>Every Sunday, 11 AM to 1 PM, for children aged 6 to 12.</p>
+    </div>
+  </section>
 
   <section class="block alt" id="school">
     <div class="wrap school">
@@ -611,6 +643,17 @@ ABOUT_MAIN = f'''<main>
       </div>
     </div>
   </section>
+</main>
+'''
+
+SERVICES_MAIN = f'''<main>
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span>›</span> <span aria-current="page">Services</span></nav>
+      <h1>Our services</h1>
+      <p>What Faizan e Madina Vancouver offers the community.</p>
+    </div>
+  </section>
 
   <section class="block" id="services">
     <div class="wrap">
@@ -622,6 +665,17 @@ ABOUT_MAIN = f'''<main>
       <div class="programs">
 {SERVICES}
       </div>
+    </div>
+  </section>
+</main>
+'''
+
+BOOKS_MAIN = f'''<main>
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> <span>›</span> <span aria-current="page">Free Islamic books</span></nav>
+      <h1>Free Islamic books</h1>
+      <p>Read and download Islamic books for free.</p>
     </div>
   </section>
 
@@ -666,17 +720,9 @@ ABOUT_MAIN = f'''<main>
       <p class="books-more">Also from Dawat-e-Islami: <a href="https://alqurankarim.net/" target="_blank" rel="noopener">Al-Qur'an with translation and tafseer</a> · <a href="https://www.dawateislami.net/magazine/en" target="_blank" rel="noopener">Monthly magazine</a></p>
     </div>
   </section>
-
-  <section class="block hadees" aria-labelledby="hadeesTitle">
-    <div class="wrap">
-      <p class="kicker" id="hadeesTitle">Hadees of the week</p>
-      <p class="arabic" lang="ar">خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ</p>
-      <blockquote>The best among you is the one who learns the Qur'an and teaches it.</blockquote>
-      <cite>Sahih al-Bukhari, Hadith 5027</cite>
-    </div>
-  </section>
 </main>
 '''
+
 
 
 
@@ -930,7 +976,7 @@ EVENTS_MAIN = f'''<main>
   </section>
   <div class="wrap pt-main">
     <div class="events-grid" id="eventsGrid"></div>
-    <p class="muted centres-note">Every Thursday at 7:00 PM: <a href="about.html#ijtima">Weekly Ijtima</a>, open to everyone.</p>
+    <p class="muted centres-note">Every Thursday at 7:00 PM: <a href="ijtima.html">Weekly Ijtima</a>, open to everyone.</p>
     <a class="past-teaser" href="past-events.html"><span class="pt-ic" aria-hidden="true">↺</span><span><b>Our events through the years</b><small>See every gathering we've held, newest first</small></span><span class="pt-go" aria-hidden="true">→</span></a>
   </div>
 </main>
@@ -1031,9 +1077,16 @@ pages = {
     "index.html": (head(f"{V_NAME} | Dawat-e-Islami",
                         f"Prayer times, Jummah, weekly Ijtima, Qur'an classes and donations at {V_NAME}, 7062 134 Street, Surrey, BC.")
                    + header("home") + HOME),
-    "about.html": (head(f"About us | {V_NAME}",
-                        f"About {V_NAME}: Dawat-e-Islami in Surrey, the Thursday Weekly Ijtima and Dua-e-Maghfirah, the Weekend Islamic School, services and free Islamic books.", "about.html")
+    "about.html": (head(f"About us | {V_NAME}", f"About {V_NAME}, a centre of Dawat-e-Islami in Surrey, BC.", "about.html")
                    + header("about") + ABOUT_MAIN),
+    "ijtima.html": (head(f"Weekly Ijtima and Dua-e-Maghfirah | {V_NAME}", f"Weekly Ijtima every Thursday at 7:00 PM at {V_NAME}, and Dua-e-Maghfirah for your loved ones.", "ijtima.html")
+                   + header("ijtima") + IJTIMA_MAIN),
+    "school.html": (head(f"Faizan Weekend Islamic School | {V_NAME}", f"Faizan Weekend Islamic School at {V_NAME}: Sundays 11 AM to 1 PM for ages 6 to 12. Student work and how to register.", "school.html")
+                   + header("school") + SCHOOL_MAIN),
+    "services.html": (head(f"Services | {V_NAME}", f"Services offered by {V_NAME} to the community.", "services.html")
+                   + header("services") + SERVICES_MAIN),
+    "books.html": (head(f"Free Islamic books | {V_NAME}", f"Free Islamic books to read and download, from {V_NAME}.", "books.html")
+                   + header("services") + BOOKS_MAIN),
     "prayer-times.html": (head(f"Prayer times | {V_NAME}",
                                f"Monthly prayer and jama'at times for {V_NAME} in Surrey, BC (Hanafi).", "prayer-times.html")
                           + header("prayer") + PT_MAIN),

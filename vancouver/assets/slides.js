@@ -70,7 +70,7 @@ window.FEM_SLIDES = [
   {
     style: "month",
     button: "Join the weekly Ijtima",
-    link: "about.html#ijtima"
+    link: "ijtima.html"
   },
   {
     style: "relief",
