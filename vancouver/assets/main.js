@@ -122,10 +122,10 @@
       var ps2=prayers(today), n2=findNext(ps2);
       if(n2>-1){
         var p=ps2[n2];
-        nextEl.innerHTML='Next: <b>'+p[0]+'</b> '+(p[2]&&p[0]!=='Jummah'?p[2]:(p[0]==='Jummah'?JUMMAH[0]:p[1]));
+        nextEl.innerHTML='<span class="nx-l">Next</span> <b>'+p[0]+'</b> '+(p[2]&&p[0]!=='Jummah'?p[2]:(p[0]==='Jummah'?JUMMAH[0]:p[1]));
       }else{
         var tm=rows[now.d];
-        nextEl.innerHTML=tm?'Next: <b>Fajr</b> '+tm[3]+'<span class="tmrw"> tomorrow</span>':'';
+        nextEl.innerHTML=tm?'<span class="nx-l">Next</span> <b>Fajr</b> '+tm[3]+'<span class="tmrw"> tomorrow</span>':'';
       }
     }else nextEl.textContent='';
   }

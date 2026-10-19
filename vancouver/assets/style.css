@@ -2021,3 +2021,22 @@ a{color:var(--green)}
 .ps-guest{background:#106a51}
 .ps-guest .ps-art::after{background:linear-gradient(90deg,#106a51 0,rgba(16,106,81,.75) 20%,rgba(16,106,81,0) 42%),linear-gradient(0deg,rgba(16,106,81,.7) 0,transparent 26%)}
 @media (max-width:640px){.ps-guest .ps-art::after{background:linear-gradient(0deg,#106a51 0,rgba(16,106,81,.6) 18%,transparent 45%)}}
+/* Top bar on phones: Bismillah on its own line, then Islamic date (left) and next prayer (right), with room to breathe */
+.topbar .nx-l::after{content:":"}
+@media (max-width:900px){
+  .topbar .wrap{grid-template-columns:1fr auto;grid-template-areas:"bis bis" "date next";padding-block:8px 8px;row-gap:6px;column-gap:12px;min-height:0}
+  .topbar .bismillah{grid-area:bis;font-size:20px;line-height:1.7;padding:0;border-bottom:1px solid var(--line);padding-bottom:4px}
+  .topbar .tb-date{grid-area:date;font-size:13px;line-height:1.35;align-self:center}
+  .topbar .tb-hijri{display:block;font-weight:600}
+  .topbar .tb-greg{display:block;font-size:12px}
+  .topbar .tb-sep{display:none}
+  .topbar .next{grid-area:next;align-self:center;display:grid;justify-items:end;line-height:1.25;font-size:13.5px;white-space:nowrap}
+  .topbar .nx-l{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .topbar .nx-l::after{content:""}
+  .topbar .next b{font-size:15px}
+  .topbar .tmrw{font-size:11.5px;color:var(--muted)}
+}
+@media (max-width:900px){
+  .topbar .next{display:block;text-align:right}
+  .topbar .nx-l{display:block}
+}
