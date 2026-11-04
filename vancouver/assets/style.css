@@ -2036,3 +2036,13 @@ a{color:var(--green)}
   .topbar .next{display:block;text-align:right}
   .topbar .nx-l{display:block}
 }
+/* School page: free books for students */
+.school-books{margin-top:26px}
+.school-books .fhint{margin:-4px 0 10px}
+.school-books ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.school-books a{display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:#fff;text-decoration:none;color:var(--ink)}
+.school-books a:hover{border-color:var(--green);background:var(--green-soft)}
+.sb-ic{flex:none;width:40px;height:40px;border-radius:10px;background:var(--green-soft);color:var(--green);display:grid;place-items:center;font-size:11px;font-weight:800;letter-spacing:.04em}
+.sb-t{flex:1;display:grid;line-height:1.3}.sb-t b{font-size:15.5px}.sb-t small{color:var(--muted);font-size:13px}
+.school-books svg{flex:none;width:22px;height:22px;fill:none;stroke:var(--green);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.page-head .crumbs span[aria-current]{color:var(--ink);font-weight:600}.page-head .crumbs a{color:var(--green)}
