@@ -86,8 +86,7 @@ def head(title, desc, path=""):
 <meta property="og:url" content="{SITE_URL}{path}">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="assets/img/favicon.png"><link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Figtree:wght@400;500;600;700&family=Libre+Baskerville:ital@0;1&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/montserrat-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css?v={V}">{THEME_CSS}
 </head>
 <body>
@@ -335,6 +334,7 @@ HOME = f'''<main id="top">
     <div class="wrap">
       <p class="kicker" id="hadeesTitle">Hadees of the week</p>
       <p class="arabic" lang="ar">خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ</p>
+      <p class="hd-said">The Final Prophet of Allah <span lang="ar">ﷺ</span> said:</p>
       <blockquote>The best among you is the one who learns the Qur'an and teaches it.</blockquote>
       <cite>Sahih al-Bukhari, Hadith 5027</cite>
     </div>
@@ -1127,8 +1127,12 @@ pages = {
 SHELVED = ["tutoring.html", "tutoring-terms.html", "volunteer.html", "volunteer-terms.html", "volunteer-parent-consent.html", "map-options.html", "slide-options.html"]
 if not FUTURE:
     for name in SHELVED: pages.pop(name, None)
+import re
+def accent_title(html):
+    # Poster style: the last word of each page's main title is shown in blue
+    return re.sub(r'<h1>([^<]*\s)([^\s<]+)</h1>', r'<h1>\1<span class="hl">\2</span></h1>', html, count=1)
 for name, html in pages.items():
-    (ROOT / name).write_text(html + FOOTER)
+    (ROOT / name).write_text(accent_title(html) + FOOTER)
 # Supervisor area (demo front end): no site header/footer, not indexed, strict Content Security Policy
 SV_CSP = ("default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; "
           "img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; "

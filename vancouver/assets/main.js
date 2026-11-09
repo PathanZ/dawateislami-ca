@@ -71,7 +71,7 @@
       var ps=prayers(today), nx=findNext(ps);
       dateEl.textContent=DAYS[today[1]]+', '+now.d+' '+MONTHS[now.m-1];
       list.innerHTML=ps.map(function(p,i){
-        return '<li'+(i===nx?' class="is-next"':'')+'><span class="p">'+p[0]+'</span><span class="a">'+p[1]+'</span><span class="j">'+(p[2]||'—')+'</span></li>';
+        return '<li'+(i===nx?' class="is-next"':'')+'><span class="p">'+p[0]+'</span><span class="a">'+p[1]+'</span><span class="j'+(p[2]?'':' none')+'">'+(p[2]||'—')+'</span></li>';
       }).join('');
     }else{
       dateEl.textContent=MONTHS[now.m-1]+' '+now.y;
@@ -728,7 +728,7 @@
         +'<g clip-path="url(#psFlagClip)"><rect x="60" y="30" width="300" height="190" fill="#fff"/><rect x="60" y="30" width="80" height="190" fill="#d52b1e"/><rect x="280" y="30" width="80" height="190" fill="#d52b1e"/>'
         +'<path fill="#d52b1e" transform="translate(76.6 30.4) scale(.415)" d="'+LEAF+'"/><rect x="60" y="30" width="300" height="190" fill="url(#psFlagShade)" transform="scale(1 1)"/></g></svg>';},
       month:function(s){return '<svg class="ps-sky" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#f3e6b0">'+stars(34,7)+'</g></svg>'
-        +'<svg class="ps-moon" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="#f3d27a"/><circle cx="66" cy="38" r="36" fill="#0b2f3a"/></svg>'
+        +'<svg class="ps-moon" viewBox="0 0 100 100" aria-hidden="true"><mask id="psCres"><rect width="100" height="100" fill="#fff"/><circle cx="66" cy="38" r="36" fill="#000"/></mask><circle cx="50" cy="50" r="40" fill="#f3d27a" mask="url(#psCres)"/></svg>'
         +(s._arabic?'<p class="ps-arabic" lang="ar" dir="rtl">'+esc(s._arabic)+'</p>':'')+mosques();},
       guest:function(s,i){
         var v=s.variant||'flag', img=(s.cutout?'<img class="ps-cutout" src="assets/slides/'+esc(s.cutout)+'" alt="'+esc(s.cutoutAlt||'')+'"'+(i?' loading="lazy"':'')+'>':'');

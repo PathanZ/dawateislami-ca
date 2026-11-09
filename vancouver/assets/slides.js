@@ -53,21 +53,6 @@
 
 window.FEM_SLIDES = [
   {
-    style: "guest",
-    kicker: "Coming to Vancouver",
-    honorific: "Rukn-e-Shura",
-    title: "Haji Khalid Attari",
-    text: "Member of the Executive Committee of Dawat-e-Islami & Head of Dawat-e-Islami Canada",
-    date: "Tuesday, 27 October",
-    event: "Islamic Gathering",
-    place: "All welcome · Sisters' area available",
-    cutout: "haji-khalid-attari-hd.webp",
-    cutoutAlt: "Haji Khalid Attari",
-    button: "See the tour poster",
-    link: "events.html",
-    until: "2026-10-28"
-  },
-  {
     style: "month",
     button: "Join the weekly Ijtima",
     link: "ijtima.html"
